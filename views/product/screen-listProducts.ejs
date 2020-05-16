@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="/images/logo.png">
+    <link rel="stylesheet" href="/stylesheets/header-manager.css">
+    <link rel="stylesheet" href="/stylesheets/screen-listProducts.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="header-manager">
+        <div class="header-left">
+            <a href="javascript:void(0)" class="logo-header">
+                <img src="/images/logo.png" alt="logo" class="img-logo">
+            </a>
+            <ul class="navbar-manager">
+                <li>
+                    <a href="javascript:void(0)"><i class="fas fa-tachometer-alt"></i> Tổng quan</a>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i
+                            class="fas fa-cubes"></i> Hàng hoá </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="screen-listProducts.ejs"><i class="fas fa-cube"></i> Danh sách
+                            hàng hoá</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-calculator"></i> Thiết lập bảng giá</a>
+                        <a class="dropdown-item" href="inventory-count.html"><i class="far fa-check-square"></i> Kiểm kê</a>
+                        <a class="dropdown-item" href="#"><i class="far fa-calendar-times"></i> Cảnh báo hàng hết hạn sử
+                            dụng</a>
+                    </div>
+                </li>
+
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i
+                            class="fas fa-exchange-alt"></i> Giao dịch
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="screen-cashier.html"><i class="fas fa-cart-plus"></i> Màn hình
+                            thu ngân</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-list-alt"></i> Danh sách đơn hàng</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-truck"></i> Nhập hàng</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-reply-all"></i> Xuất hàng</a>
+
+                    </div>
+                </li>
+
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i
+                            class="fas fa-users"></i> Đối tác
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#"><i class="fas fa-user"></i> Khách hàng</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-building"></i> Nhà cung cấp</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><i class="far fa-money-bill-alt"></i> Thu chi</a>
+                </li>
+
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i
+                            class="fas fa-chart-bar"></i> Báo cáo
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#"><i class="fas fa-chart-pie"></i> Tổng kết cuối ngày</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-exchange-alt"></i> Báo cáo bán hàng</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-truck"></i> Báo cáo nhập hàng</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-reply-all"></i> Báo cáo xuất hàng</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-key"></i> Phân tích bán hàng</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-chart-line"></i> Kết quả kinh doanh</a>
+
+
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+        <div class="header-right">
+            <div>
+                <a href="screen-cashier.html" title="Màn hình thu ngân"><i class="fas fa-cart-plus"></i></a>
+            </div>
+            <div>
+                <a href="javascript:void(0)" title="Chọn chi nhánh"><i class="fas fa-map-marker-alt"></i></a>
+            </div>
+            <div>
+                <a href="javascript:void(0)" title="Thiết lập"><i class="fas fa-cog"></i></a>
+            </div>
+            <div class="dropdown">
+                <a href="javascript:void(0)" class="dropdown-toggle icon-account" data-toggle="dropdown"
+                    title="Thông tin tài khoản"><i class="fas fa-user"></i></a>
+                <div class="dropdown-menu dropdown-account">
+                    <a class="dropdown-item" href="#"><i class="fas fa-user"></i> Thông tin tài khoản</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-power-off"></i> Đăng xuất</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-page">
+        <div class="filter">
+            <div class="panel-filter">
+                <h2 class="panel-filter-title"><i class="fas fa-th-list"></i> TÌM KIẾM</h2>
+                <div class="panel-filter-body">
+                    <div class="form-group">
+                        <input type="text" class="input-filter form-control" placeholder="Mã, Tên">
+                    </div>
+                    <div class="form-group">
+                        <form action="#">
+                            <div class="input-group">
+                                <input type="text" placeholder="Nhà cung cấp" class="form-control input-filter">
+                                <i class="fas fa-search icon-search-ncc"></i>
+                            </div>
+                            <div class="icon-undefinded">
+                                <a href="javascript:void(0)"><i class="fas fa-times"></i><span>Không xác định</span></a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-filter">
+                <h2 class="panel-filter-title"><i class="fas fa-th-list"></i> LỌC THEO NHÓM</h2>
+                <div class="btn-add-group" data-toggle="modal" data-target="#modal-add-group"><i
+                        class="fas fa-plus-circle"></i>
+                </div>
+                <!-- The Modal -->
+                <div class="modal fade" id="modal-add-group">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Thêm nhóm mới</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <div>
+                                    <h5>Tên nhóm</h5>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="select-group">Nhóm cha</label>
+                                    <select class="form-control" id="select-group">
+                                        <option>Thuốc lá</option>
+                                        <option>Nước ngọt</option>
+                                        <option>Mỹ phẩm</option>
+                                        <option>Bánh kẹo</option>
+                                        <option>Văn phòng phẩm</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-warning" data-dismiss="modal">Thoát</button>
+                                <button type="button" class="btn btn-primary">Lưu</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-filter-body">
+                    <ul>
+                        <li><a href="javascript:void(0)"> Tất cả</a></li>
+                        <li><a href="javascript:void(0)"> Thuốc lá</a></li>
+                        <li><a href="javascript:void(0)"> Nước ngọt</a></li>
+                        <li><a href="javascript:void(0)"> Mỹ phẩm</a></li>
+                        <li><a href="javascript:void(0)"> Kẹo bánh</a></li>
+                        <li><a href="javascript:void(0)"> Văn phòng phẩm</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-filter">
+                <h2 class="panel-filter-title"><i class="fas fa-th-list"></i> LỌC THEO TỒN KHO</h2>
+                <div class="panel-filter-body">
+                    <div class="form-group">
+                        <div class="radio">
+                            <input type="radio" name="optionRadios" id="optionRadios0">
+                            <label for="optionRadios0">Không lọc</label>
+                        </div>
+                        <div class="radio">
+                            <input type="radio" name="optionRadios" id="optionRadios1">
+                            <label for="optionRadios1">Còn hàng</label>
+                        </div>
+                        <div class="radio">
+                            <input type="radio" name="optionRadios" id="optionRadios2">
+                            <label for="optionRadios2">Hết hàng</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-products">
+            <div class="header-table-products">
+                <h1>DANH SÁCH HÀNG HOÁ</h1>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-primary" id="add-newProduct" ><i class="fas fa-plus-circle"></i>
+<!--                        <a class="btn-primary" href="/product/add">THÊM MỚI HÀNG HOÁ</a>-->
+                        THÊM MỚI HÀNG HOÁ
+                    </button>
+                    <button type="button" class="btn btn-primary"><i class="fas fa-file-excel"></i> XUẤT RA
+                        FILE</button>
+                    <button type="button" class="btn btn-primary"><i class="fas fa-cloud-upload-alt"></i>
+                        IMPORT</button>
+                </div>
+            </div>
+            <div class="list-products">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="title-table-products">
+                            <th class="blank-col"></th>
+                            <th class="code-product-col">Mã hàng hoá</th>
+                            <th class="name-product-col">Tên hàng hoá</th>
+                            <th class="price-product-col">Giá bán</th>
+                            <th class="cost-product-col">Giá vốn</th>
+                            <th class="inventory-col">Tồn kho</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(var i = 0; i< data.length; i++) { %>
+                            <tr element-product>
+                                <th scope="row"><%= (i+1) %></th>
+                                <td>
+                                    <div class="img-product"></div>
+                                    <div class="code-product"><%= data[i].Product_id%></div>
+                                </td>
+                                <td class="name-product"><%= data[i].Product_name%></td>
+                                <td class="price-product"><%= data[i].Product_small_unit_price%></td>
+                                <td class="cost-product"><%= data[i].Product_original_price%></td>
+                                <td class="inventory"></td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/javascripts/header-manager.js"></script>
+<script src="/javascripts/screen-listProduct.js"></script>
+
+</html>

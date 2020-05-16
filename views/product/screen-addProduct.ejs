@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="/images/logo.png">
+    <link rel="stylesheet" href="/stylesheets/header-manager.css">
+    <link rel="stylesheet" href="/stylesheets/screen-addProducts.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+<div class="header-manager">
+    <div class="header-left">
+        <a href="javascript:void(0)" class="logo-header">
+            <img src="/images/logo.png" alt="logo" class="img-logo">
+        </a>
+        <ul class="navbar-manager">
+            <li>
+                <a href="javascript:void(0)"><i class="fas fa-tachometer-alt"></i> Tổng quan</a>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i
+                        class="fas fa-cubes"></i> Hàng hoá </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="screen-listProducts.html"><i class="fas fa-cube"></i> Danh sách
+                        hàng hoá</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-calculator"></i> Thiết lập bảng giá</a>
+                    <a class="dropdown-item" href="#"><i class="far fa-check-square"></i> Kiểm kê</a>
+                    <a class="dropdown-item" href="#"><i class="far fa-calendar-times"></i> Cảnh báo hàng hết hạn sử
+                        dụng</a>
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i
+                        class="fas fa-exchange-alt"></i> Giao dịch
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="screen-cashier.html"><i class="fas fa-cart-plus"></i> Màn hình
+                        thu ngân</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-list-alt"></i> Danh sách đơn hàng</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-truck"></i> Nhập hàng</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-reply-all"></i> Xuất hàng</a>
+
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i
+                        class="fas fa-users"></i> Đối tác
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#"><i class="fas fa-user"></i> Khách hàng</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-building"></i> Nhà cung cấp</a>
+                </div>
+            </li>
+            <li>
+                <a href="javascript:void(0)"><i class="far fa-money-bill-alt"></i> Thu chi</a>
+            </li>
+
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i
+                        class="fas fa-chart-bar"></i> Báo cáo
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#"><i class="fas fa-chart-pie"></i> Tổng kết cuối ngày</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-exchange-alt"></i> Báo cáo bán hàng</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-truck"></i> Báo cáo nhập hàng</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-reply-all"></i> Báo cáo xuất hàng</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-key"></i> Phân tích bán hàng</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-chart-line"></i> Kết quả kinh doanh</a>
+
+
+                </div>
+            </li>
+
+        </ul>
+    </div>
+    <div class="header-right">
+        <div>
+            <a href="screen-cashier.html" title="Màn hình thu ngân"><i class="fas fa-cart-plus"></i></a>
+        </div>
+        <div>
+            <a href="javascript:void(0)" title="Chọn chi nhánh"><i class="fas fa-map-marker-alt"></i></a>
+        </div>
+        <div>
+            <a href="javascript:void(0)" title="Thiết lập"><i class="fas fa-cog"></i></a>
+        </div>
+        <div class="dropdown">
+            <a href="javascript:void(0)" class="dropdown-toggle icon-account" data-toggle="dropdown"
+               title="Thông tin tài khoản"><i class="fas fa-user"></i></a>
+            <div class="dropdown-menu dropdown-account">
+                <a class="dropdown-item" href="#"><i class="fas fa-user"></i> Thông tin tài khoản</a>
+                <a class="dropdown-item" href="#"><i class="fas fa-power-off"></i> Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-page">
+    <div class="content-header">
+        <h1>THÊM MỚI HÀNG HOÁ</h1>
+    </div>
+    <div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#detail">Chi tiết</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#moreInformation">Thông tin khác</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="detail">
+                <div class="content-details">
+                    <div class="content-details1">
+                        <div class="form-group">
+                            <label>Mã hàng hoá / SKU / Mã vạch</label>
+                            <input type="text" class="form-control" placeholder="Tự động tạo mã">
+                        </div>
+                        <div class="form-group">
+                            <label>Tên hàng hoá</label>
+                            <input type="text" class="form-control" placeholder="Tên hàng hoá">
+                        </div>
+                        <div class="form-group">
+                            <label>Giá bán</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Giá vốn</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="content-details2">
+                        <div class="form-group">
+                            <label> Nhiều mã vạch</label>
+                            <input type="text" class="form-control" placeholder="Mã vạch 2">
+                            <input type="text" class="form-control" placeholder="Mã vạch 3">
+                            <input type="text" class="form-control" placeholder="Mã vạch 4">
+                            <input type="text" class="form-control" placeholder="Mã vạch 5">
+                        </div>
+                    </div>
+                    <div class="content-details3">
+                        <div class="form-group">
+                            <label for="select-group">Loại hàng</label>
+                            <select class="form-control" id="select-group">
+                                <option>Hàng hoá</option>
+                                <option>Dịch vụ</option>
+                                <option>Combo</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="select-group">Tên nhóm</label>
+                            <select class="form-control" id="select-group">
+                                <option>Thuốc lá</option>
+                                <option>Nước ngọt</option>
+                                <option>Mỹ phẩm</option>
+                                <option>Bánh kẹo</option>
+                                <option>Văn phòng phẩm</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tồn kho</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>VAT(%)</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" value="">Quản lý theo số lô & hạn sử
+                                dụng ?
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-nav">
+                    <button type="button" class="btn btn-primary"><i class="fas fa-save"></i> Lưu</button>
+                    <button type="button" class="btn btn-warning"> <a href="/product"> Thoát </a><i class="fas fa-forward"></i></button>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="moreInformation">
+                <div class="form-group">
+                    <label>Ghi chú nhanh khi bán hàng</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+<script src="/javascripts/header-manager.js"></script>
+
+</html>
