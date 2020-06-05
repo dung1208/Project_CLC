@@ -8,6 +8,7 @@ module.exports = {
                 res.json({data:''});
             } else {
                 res.render("product/screen-listProducts", {data:rows});
+                // res.json({data:rows});
             }
         })
     },
@@ -15,4 +16,4 @@ module.exports = {
     display_add_product: function (req, res) {
         res.render('product/screen-addProduct', {data:''});
     }
-}
+};
