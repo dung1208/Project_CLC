@@ -13,96 +13,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <title>Document</title>
+
+    <!-- Custom styles for this page -->
+    <link href="/stylesheets/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="header-manager">
-        <div class="header-left">
-            <a href="javascript:void(0)" class="logo-header">
-                <img src="/images/logo.png" alt="logo" class="img-logo">
-            </a>
-            <ul class="navbar-manager">
-                <li>
-                    <a href="javascript:void(0)"><i class="fas fa-tachometer-alt"></i> Tổng quan</a>
-                </li>
-                <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="fas fa-cubes"></i> Hàng hoá </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="screen-listProducts.ejs"><i class="fas fa-cube"></i> Danh sách
-                            hàng hoá</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-calculator"></i> Thiết lập bảng giá</a>
-                        <a class="dropdown-item" href="inventory-count.html"><i class="far fa-check-square"></i> Kiểm kê</a>
-                        <a class="dropdown-item" href="#"><i class="far fa-calendar-times"></i> Cảnh báo hàng hết hạn sử
-                            dụng</a>
-                    </div>
-                </li>
-
-                <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="fas fa-exchange-alt"></i> Giao dịch
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="screen-cashier.html"><i class="fas fa-cart-plus"></i> Màn hình
-                            thu ngân</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-list-alt"></i> Danh sách đơn hàng</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-truck"></i> Nhập hàng</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-reply-all"></i> Xuất hàng</a>
-
-                    </div>
-                </li>
-
-                <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="fas fa-users"></i> Đối tác
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#"><i class="fas fa-user"></i> Khách hàng</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-building"></i> Nhà cung cấp</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="javascript:void(0)"><i class="far fa-money-bill-alt"></i> Thu chi</a>
-                </li>
-
-                <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="fas fa-chart-bar"></i> Báo cáo
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#"><i class="fas fa-chart-pie"></i> Tổng kết cuối ngày</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-exchange-alt"></i> Báo cáo bán hàng</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-truck"></i> Báo cáo nhập hàng</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-reply-all"></i> Báo cáo xuất hàng</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-key"></i> Phân tích bán hàng</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-chart-line"></i> Kết quả kinh doanh</a>
-
-
-                    </div>
-                </li>
-
-            </ul>
-        </div>
-        <div class="header-right">
-            <div>
-                <a href="screen-cashier.html" title="Màn hình thu ngân"><i class="fas fa-cart-plus"></i></a>
-            </div>
-            <div>
-                <a href="javascript:void(0)" title="Chọn chi nhánh"><i class="fas fa-map-marker-alt"></i></a>
-            </div>
-            <div>
-                <a href="javascript:void(0)" title="Thiết lập"><i class="fas fa-cog"></i></a>
-            </div>
-            <div class="dropdown">
-                <a href="javascript:void(0)" class="dropdown-toggle icon-account" data-toggle="dropdown"
-                    title="Thông tin tài khoản"><i class="fas fa-user"></i></a>
-                <div class="dropdown-menu dropdown-account">
-                    <a class="dropdown-item" href="#"><i class="fas fa-user"></i> Thông tin tài khoản</a>
-                    <a class="dropdown-item" href="#"><i class="fas fa-power-off"></i> Đăng xuất</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <% include ../layout/header-manager %>
     <div class="content-page">
         <div class="filter">
             <div class="panel-filter">
@@ -214,7 +131,7 @@
                 </div>
             </div>
             <div class="list-products">
-                <table class="table table-hover">
+                <table class="table table-hover" id="dataTable">
                     <thead>
                         <tr class="title-table-products">
                             <th class="blank-col"></th>
@@ -247,5 +164,19 @@
 </body>
 <script src="/javascripts/header-manager.js"></script>
 <script src="/javascripts/screen-listProduct.js"></script>
+
+<!-- Bootstrap core JavaScript-->
+<script src="/javascripts/jquery/jquery.min.js"></script>
+<!--<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+
+<!-- Core plugin JavaScript-->
+<script src="javascripts/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="javascripts/datatables/jquery.dataTables.min.js"></script>
+<script src="javascripts/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="javascripts/demo/datatables-demo.js"></script>
 
 </html>
