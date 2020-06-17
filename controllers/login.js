@@ -21,6 +21,7 @@ module.exports = {
                     req.session.user = results[0];
 
                     res.redirect('/dashboard');
+
                 }
                 else {
                     message = 'Tài khoản hoặc mật khẩu không đúng';

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="../public/images/logo.png">
+    <link rel="stylesheet" type ="text/css" href="/stylesheets/screen-cashier.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!-- datetime-picker -->
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <title>Thu ngân</title>
+</head>
+
+<body>
+    <div class="header-cashier">
+        <div class="header-left">
+            <div class="search-header">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                    <i class="fas fa-barcode"></i>
+                </button>
+                <form action="javascript:void(0)">
+                    <input type="text" class="input-search" placeholder="Tìm kiếm mặt hàng" >
+                </form>
+            </div>
+        </div>
+        <div class="header-right">
+            <div>
+                <a href="javascript:void(0)" title="xử lý đơn hàng"><i class="fas fa-bell"></i></a>
+            </div>
+            <div>
+                <a href="javascript:void(0)" title="Thiết lập"><i class="fas fa-list-ul"></i></a>
+            </div>
+            <div class="dropdown">
+                <a href="#" data-toggle="dropdown"> <i class="fas fa-power-off"></i></a>
+                <div class="dropdown-menu dropdown-power">
+                    <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                    <a class="dropdown-item" href="Dashboard.html" fas fa-tachometer-alt"></i> Quay
+                        về trang quản lý</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="table-product">
+            <table class="table table-striped table-listProducts">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>MÃ</th>
+                        <th>TÊN HÀNG HOÁ</th>
+                        <th class="column-center">ĐƠN GIÁ</th>
+                        <th class="column-center">SL</th>
+                        <th class="total-price">THÀNH TIỀN</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="order-product"><span>1</span></td>
+                        <td class="code-product">HH000020</td>
+                        <td class="name-product">Kẹo dynamite socola</td>
+                        <td class="price-product">
+                            <div class="input-group"><input type="text" class="form-control input-info-product"> </div>
+                        </td>
+                        <td class="amount-product">
+                            <div class="input-group">
+                                <span class="span-input-product"><i class="fas fa-minus"></i></span>
+                                <input type="text" class="form-control input-info-product">
+                                <span class="span-input-product"><i class="fas fa-plus"></i></span>
+                                <!-- <span><i class="fas fa-calculator"></i></span> -->
+                            </div>
+                        </td>
+                        <td class="total-price">18,000</td>
+                        <td class="delete-product"><a href="javascript:void(0)"><i class="far fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="bill">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#information">Thông tin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#details">Chi tiết</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div id="information" class="container tab-pane active"><br>
+                    <div class="input-group">
+                        <input type="text" class="form-control input-searchClient" placeholder="Tìm khách hàng">
+                        <span class="icon-searchInput"><i class="fas fa-search"></i></span>
+                        <span class="icon-searchInput"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="icon-guest">
+                        <a href="javasxript:void(0)"><i class="fas fa-times"></i> Khách lẻ</a>
+                    </div>
+                    <div>
+                        <input id="input-datetime" />
+                        <script>
+                            $('#input-datetime').datetimepicker({
+                                uiLibrary: 'bootstrap4',
+                                modal: true,
+                                footer: true
+                            });
+                        </script>
+                    </div>
+                    <table class="table table-details">
+                        <tbody>
+                            <tr>
+                                <td class="text-left"> <strong>Tổng số lượng</strong></td>
+                                <td class="text-right"> <span>1</span></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left"><strong>Tổng thành tiền</strong></td>
+                                <td class="text-right"><span>20,000</span></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left"><strong>Chiết khấu</strong></td>
+                                <td class="text-right">
+                                    <div>
+                                        <a href="javascript:void(0)">
+                                            <i class="fas fa-gift"></i>
+                                        </a>
+                                        <input type="text" class="input-textRight">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left"><strong>Tổng cộng</strong></td>
+                                <td class="text-right"><span>0</span></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left"><strong>Tiền khách trả</strong></td>
+                                <td class="text-right">
+                                    <div>
+                                        <a href="javascript:void(0)">
+                                            <i class="far fa-copy"></i>
+                                        </a>
+                                        <input type="text" class="input-textRight">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left"><strong>Tiền thừa</strong></td>
+                                <td class="text-right"><span>0</span></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="btn-action">
+                        <button class="btn-print btn-warning"><i class="fas fa-print"></i></button>
+                        <button class="btn-pay btn-danger">Thanh toán</button>
+                    </div>
+                </div>
+                <div id="details" class="container tab-pane fade"><br>
+                    <div class="form-group">
+                        <label for="#"> Mã đơn hàng</label>
+                        <input type="text" class="form-control" placeholder="Tự động tạo mã">
+                    </div>
+                    <div class="form-group">
+                        <label for="#"> Người bán</label>
+                        <input type="text" class="form-control" placeholder="Admin">
+                    </div>
+                    <div class="form-group">
+                        <label for="#"> Ghi chú</label>
+                        <textarea type="text" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
