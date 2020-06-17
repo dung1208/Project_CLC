@@ -11,6 +11,7 @@ var connection  = require('./lib/db');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var cashierRouter = require('./routes/cashier');
 var productRouter = require('./routes/product');
 var loginRouter = require('./routes/login');
 
@@ -37,6 +38,7 @@ app.use(session({
 app.use(flash());
 
 app.use('/', indexRouter);
+app.use('/cashier',cashierRouter);
 app.use('/users', usersRouter);
 app.use('/product', productRouter);
 app.use('/login', loginRouter);

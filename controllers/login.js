@@ -20,7 +20,7 @@ module.exports = {
                     req.session.user = results[0];
                     console.log(results[0]);
 
-                    res.redirect('/');
+                    res.redirect('/cashier');
                 }
                 else {
                     message = 'Tài khoản hoặc mật khẩu không đúng';
