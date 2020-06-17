@@ -4,6 +4,6 @@ var router = express.Router();
 const dashBoardController = require('../controllers/dashboard')
 
 /* GET home page. */
-router.get('/', dashBoardController.dashboard);
+router.get('/dashboard', dashBoardController.dashboard);
 
 module.exports = router;

@@ -17,10 +17,10 @@ module.exports = {
                 }
                 else if (results.length) {
                     req.session.userId = results[0].Staff_id;
+                    req.session.storeId = results[0].Store_id;
                     req.session.user = results[0];
-                    console.log(results[0]);
 
-                    res.redirect('/');
+                    res.redirect('/dashboard');
                 }
                 else {
                     message = 'Tài khoản hoặc mật khẩu không đúng';
@@ -33,4 +33,3 @@ module.exports = {
         }
     }
 };
-

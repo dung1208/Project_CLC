@@ -144,8 +144,9 @@
                     </thead>
                     <tbody>
                         <% for(var i = 0; i< data.length; i++) { %>
-                            <tr element-product>
+                            <tr class="element-product" data-product="<%= JSON.stringify(data[i])%>">
                                 <th scope="row"><%= (i+1) %></th>
+<!--                                <th scope="row"><%= JSON.stringify(data[i]) %></th>-->
                                 <td>
                                     <div class="img-product"></div>
                                     <div class="code-product"><%= data[i].Product_id%></div>
@@ -153,7 +154,7 @@
                                 <td class="name-product"><%= data[i].Product_name%></td>
                                 <td class="price-product"><%= data[i].Product_small_unit_price%></td>
                                 <td class="cost-product"><%= data[i].Product_original_price%></td>
-                                <td class="inventory"></td>
+                                <td class="inventory"><%= data[i].Quantity%></td>
                             </tr>
                         <% } %>
                     </tbody>
