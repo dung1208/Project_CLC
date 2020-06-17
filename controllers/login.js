@@ -20,7 +20,9 @@ module.exports = {
                     req.session.storeId = results[0].Store_id;
                     req.session.user = results[0];
 
-                    res.redirect('/dashboard');
+                    if (req.session.user.role === "Cashier") {
+                        res.redirect('/cashier');
+                    } else res.redirect('/dashboard');
 
                 }
                 else {
