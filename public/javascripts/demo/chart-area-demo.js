@@ -28,7 +28,10 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 // Area Chart Example
+document.getElementsByClassName("dashboard-data").disabled = true;
 var ctx = document.getElementById("myAreaChart");
+var dataArea = $(".dashboard-data").data("doanhthu");
+
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
