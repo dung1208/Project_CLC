@@ -34,15 +34,6 @@
     outline: none;
     float: right;
 }
-.input-search{
-    height: 34px;
-    width: 257px;
-    font-size: 13px;
-    padding: 6px 6px;
-    float: left;
-    outline: none;
-    margin-left: -5px;
-}
 
 /* tab panes */
 .form-control.input-searchClient{

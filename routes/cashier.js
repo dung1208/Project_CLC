@@ -3,7 +3,7 @@ var router = express.Router();
 
 const cashierController = require('../controllers/cashier')
 
-// display product page
+// display cashier page
 router.get('/', cashierController.cashier);
-
+router.get('/search/:q', cashierController.live_search);
 module.exports = router;
