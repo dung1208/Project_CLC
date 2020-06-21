@@ -30,78 +30,6 @@
 
 <div class="container-fluid">
     <div class="row">
-        <!-- Don hanghang-->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">ĐƠN HÀNG</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">40</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-tags fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Doanh thu -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Doanh thu</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">215,000 VND</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tiền mặt -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">KHÔNG TÊN </div>
-                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">?</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- HET HAN SU DUNGDUNG -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">HẾT HẠN SỬ DỤNG</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-calendar-times fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid">
-    <div class="row">
         <div class="col-xl-8 col-lg-7">
 
             <!-- DOANH THU Chart -->
@@ -112,12 +40,10 @@
                         <button class="btn  dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <button class="dropdown-item" type="button">Hôm nay</button>
-                            <button class="dropdown-item" type="button">Hôm qua</button>
-                            <button class="dropdown-item" type="button">7 ngày trước </button>
-                            <button class="dropdown-item" type="button">Tháng này</button>
+                            <button class="dropdown-item time-doanhthu" type="button" id="time-doanhthu" data-content="">7 ngày trước </button>
+                            <button class="dropdown-item time-doanhthu" type="button" id="time-doanhthu" data-content="this_month">Tháng này</button>
+                            <button class="dropdown-item time-doanhthu" type="button" id="time-doanhthu" data-content="previous_month">Tháng trước</button>
                             <button class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModal">Khác </button>
-
                         </div>
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -134,7 +60,7 @@
                                             <div class="row">
                                                 <div class="modal-card-body">
                                                     <a>Từ ngày </a>
-                                                    <input id="datepicker1" width="200" />
+                                                    <input id="datepicker1" class="lower-date-dt" width="200" />
                                                     <script>
                                                         $('#datepicker1').datepicker({
                                                             uiLibrary: 'bootstrap4'
@@ -144,7 +70,7 @@
                                                 </div>
                                                 <div class="modal-card-body">
                                                     <a> Đến ngày </a>
-                                                    <input id="datepicker2" width="200" />
+                                                    <input id="datepicker2" class="greater-date-dt" width="200" />
                                                     <script>
                                                         $('#datepicker2').datepicker({
                                                             uiLibrary: 'bootstrap4'
@@ -158,7 +84,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát </button>
-                                        <button type="button" class="btn btn-primary">Lưu </button>
+                                        <button type="button" class="btn btn-primary time-doanhthu" id="time-doanhthu" data-content="Khac">Lưu </button>
                                     </div>
                                 </div>
                             </div>
@@ -276,14 +202,12 @@
                                                         </div>
                                                         <div class="modal-card-body">
                                                             <a> Đến ngày </a>
-                                                            <input id="datepicker2" width="200" />
+                                                            <input id="datepicker2"  width="200" />
                                                             <script>
                                                                 $('#datepicker2').datepicker({
                                                                     uiLibrary: 'bootstrap4'
                                                                 });
                                                             </script>
-
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -326,9 +250,7 @@
     </div>
 
 </div>
-</div>
 
-</div>
 <!-- Footer -->
 <footer class="footer sticky-footer">
     <div class="container my-auto">
@@ -347,6 +269,7 @@
 <!-- <script src="../js/chart-area-demo.js"></script>   -->
 <!-- Bootstrap core JavaScript-->
 <script src="javascripts/jquery/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 <!--<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
 
 <!-- Core plugin JavaScript-->
