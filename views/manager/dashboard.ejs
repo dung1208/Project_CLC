@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="../img/logo.png">
+    <link rel="stylesheet" href="stylesheets/header-manager.css">
+    <link rel="stylesheet" href="stylesheets/dashboard.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <title>Dashboard</title>
+</head>
+
+<body>
+<% include ../layout/header-manager %>
+
+<div class="title">
+    <a> Tổng quan </a>
+</div>
+
+<div class="dashboard-data" data-doanhthu="<%= JSON.stringify(data) %>">
+
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-8 col-lg-7">
+
+            <!-- DOANH THU Chart -->
+            <div class="card shadow mb-4 ">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">DOANH THU</h6>
+                    <div class="dropdown">
+                        <button class="btn  dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <button class="dropdown-item time-doanhthu" type="button" id="time-doanhthu" data-content="">7 ngày trước </button>
+                            <button class="dropdown-item time-doanhthu this_month" type="button" id="time-doanhthu" data-content="this_month">Tháng này</button>
+                            <button class="dropdown-item time-doanhthu" type="button" id="time-doanhthu" data-content="previous_month">Tháng trước</button>
+                            <button class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModal">Khác </button>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Lựa chọn khác </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="modal-card-body">
+                                                    <a>Từ ngày </a>
+                                                    <input id="datepicker1" class="lower-date-dt" width="200" />
+                                                    <script>
+                                                        $('#datepicker1').datepicker({
+                                                            uiLibrary: 'bootstrap4'
+                                                        });
+                                                    </script>
+
+                                                </div>
+                                                <div class="modal-card-body">
+                                                    <a> Đến ngày </a>
+                                                    <input id="datepicker2" class="greater-date-dt" width="200" />
+                                                    <script>
+                                                        $('#datepicker2').datepicker({
+                                                            uiLibrary: 'bootstrap4'
+                                                        });
+                                                    </script>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát </button>
+                                        <button type="button" class="btn btn-primary time-doanhthu" id="time-doanhthu" data-content="Khac">Lưu </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="myAreaChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">SẢN PHẨM BÁN CHẠY </h6>
+                            <div class="dropdown">
+                                <button class="btn  dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <button class="dropdown-item" type="button">Hôm nay</button>
+                                    <button class="dropdown-item" type="button">Hôm qua</button>
+                                    <button class="dropdown-item" type="button">7 ngày trước </button>
+                                    <button class="dropdown-item" type="button">Tháng này</button>
+                                    <button class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModal" >Khác </button>
+                                </div>
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Lựa chọn khác </h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <div class="modal-card-body">
+                                                            <a>Từ ngày </a>
+                                                            <input id="datepicker1" width="200" />
+                                                            <script>
+                                                                $('#datepicker1').datepicker({
+                                                                    uiLibrary: 'bootstrap4'
+                                                                });
+                                                            </script>
+
+                                                        </div>
+                                                        <div class="modal-card-body">
+                                                            <a> Đến ngày </a>
+                                                            <input id="datepicker2" width="200" />
+                                                            <script>
+                                                                $('#datepicker2').datepicker({
+                                                                    uiLibrary: 'bootstrap4'
+                                                                });
+                                                            </script>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát </button>
+                                                <button type="button" class="btn btn-primary">Lưu </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Noti Body -->
+                        <div class="most_product_area">
+
+                        </div>
+                    </div>
+
+                    <div class="card shadow mb-4 sales-area-01">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">DOANH THU THEO CHI NHÁNH </h6>
+                            <div class="dropdown">
+                                <button class="btn  dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <button class="dropdown-item" type="button">Hôm nay</button>
+                                    <button class="dropdown-item" type="button">Hôm qua</button>
+                                    <button class="dropdown-item" type="button">7 ngày trước </button>
+                                    <button class="dropdown-item" type="button">Tháng này</button>
+                                    <button class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModal" >Khác </button>
+                                </div>
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Lựa chọn khác </h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <div class="modal-card-body">
+                                                            <a>Từ ngày </a>
+                                                            <input id="datepicker1" width="200" />
+                                                            <script>
+                                                                $('#datepicker1').datepicker({
+                                                                    uiLibrary: 'bootstrap4'
+                                                                });
+                                                            </script>
+
+                                                        </div>
+                                                        <div class="modal-card-body">
+                                                            <a> Đến ngày </a>
+                                                            <input id="datepicker2"  width="200" />
+                                                            <script>
+                                                                $('#datepicker2').datepicker({
+                                                                    uiLibrary: 'bootstrap4'
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát </button>
+                                                <button type="button" class="btn btn-primary">Lưu </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <!-- Noti Body -->
+                        <div class="sales_area">
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- HOAT DONG GAN DAY-->
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">HOẠT ĐỘNG GẦN ĐÂY</h6>
+                    <button class="btn  dropdown-toggle invisible" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </button>
+                </div>
+                <!-- Noti Body -->
+                <div class="react_area">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer class="footer sticky-footer">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span> &copy; Copyright by TD Group 2020</span>
+        </div>
+    </div>
+</footer>
+<!-- End of Footer -->
+</body>
+<!--<script src="../js/Dashboard_Admin.js"></script>-->
+<!-- Page level plugins -->
+<!-- <script src="../vendor/chart.js/Chart.min.js"></script> -->
+
+<!-- Page level custom scripts -->
+<!-- <script src="../js/chart-area-demo.js"></script>   -->
+<!-- Bootstrap core JavaScript-->
+<script src="javascripts/jquery/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<!--<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+
+<!-- Core plugin JavaScript-->
+<script src="javascripts/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="javascripts/chart.js/Chart.min.js"></script>
+<!-- Page level custom scripts -->
+<script src="javascripts/demo/chart-area-demo.js"></script>
+</html>
