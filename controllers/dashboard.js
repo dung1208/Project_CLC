@@ -1,10 +1,11 @@
 const DashboardData = require('../model/dashboard')
+const OrdersData = require('../model/orders')
 
 
 module.exports = {
     dashboard: function (req, res, next) {
         var user = req.session.user;
-        var storeId = req.session.storeId
+        var storeId = req.session.storeId;
 
         if (user == null) {
             res.redirect("/login");
@@ -20,15 +21,29 @@ module.exports = {
             // res.render("error", {message: mess, error: err});
         }
 
-        DashboardData.get_orders(storeId, function (err, results) {
+        let dataListOrders = [];
+        let ordersData = [];
+        OrdersData.get_list_orders(storeId, function (err, results) {
             if (err) {
                 req.flash('error', err);
-                res.render("manager/dashboard", {data:''});
+                dataListOrders  = [];
+                res.render("manager/dashboard", {data:dataListOrders});
             }
             else {
-                res.render("manager/dashboard", {data:results});
-                // res.json({data:results});
+                dataListOrders = results;
+                OrdersData.get_orders(storeId, function (err, results) {
+                    if (err) {
+                        req.flash('error', err);
+                        ordersData  = [];
+                        res.render("manager/dashboard", {dataListOrders:dataListOrders, ordersData:ordersData});
+                    }
+                    else {
+                        ordersData = results;
+                        res.render("manager/dashboard", {dataListOrders:dataListOrders, ordersData:ordersData});
+                    }
+                })
             }
         })
+
     }
 };

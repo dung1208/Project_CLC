@@ -24,8 +24,7 @@
     <a> Tổng quan </a>
 </div>
 
-<div class="dashboard-data" data-doanhthu="<%= JSON.stringify(data) %>">
-
+<div class="dashboard-data" data-doanhthu="<%= JSON.stringify(dataListOrders) %>" data-lai="<%= JSON.stringify(ordersData)%>">
 </div>
 
 <div class="container-fluid">
@@ -40,13 +39,13 @@
                         <button class="btn  dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <button class="dropdown-item time-doanhthu" type="button" id="time-doanhthu" data-content="">7 ngày trước </button>
+                            <button class="dropdown-item time-doanhthu" type="button" id="time-doanhthu" data-content="7ago">7 ngày trước </button>
                             <button class="dropdown-item time-doanhthu this_month" type="button" id="time-doanhthu" data-content="this_month">Tháng này</button>
                             <button class="dropdown-item time-doanhthu" type="button" id="time-doanhthu" data-content="previous_month">Tháng trước</button>
-                            <button class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModal">Khác </button>
+                            <button class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModalDoanhThu">Khác </button>
                         </div>
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="exampleModalDoanhThu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -105,16 +104,16 @@
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">SẢN PHẨM BÁN CHẠY </h6>
                             <div class="dropdown">
-                                <button class="btn  dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn  dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <button class="dropdown-item" type="button">Hôm nay</button>
-                                    <button class="dropdown-item" type="button">Hôm qua</button>
-                                    <button class="dropdown-item" type="button">7 ngày trước </button>
-                                    <button class="dropdown-item" type="button">Tháng này</button>
-                                    <button class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModal" >Khác </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                                    <button class="dropdown-item popular-product today" type="button" data-content="today">Hôm nay</button>
+                                    <button class="dropdown-item popular-product" type="button" data-content="yesterday">Hôm qua</button>
+                                    <button class="dropdown-item popular-product" type="button" data-content="7ago">7 ngày trước </button>
+                                    <button class="dropdown-item popular-product" type="button" data-content="this_month">Tháng này</button>
+                                    <button class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModalSPBT" >Khác </button>
                                 </div>
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="exampleModalSPBT" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -128,9 +127,9 @@
                                                     <div class="row">
                                                         <div class="modal-card-body">
                                                             <a>Từ ngày </a>
-                                                            <input id="datepicker1" width="200" />
+                                                            <input id="datepicker3" class="lower-date-popular" width="200" />
                                                             <script>
-                                                                $('#datepicker1').datepicker({
+                                                                $('#datepicker3').datepicker({
                                                                     uiLibrary: 'bootstrap4'
                                                                 });
                                                             </script>
@@ -138,9 +137,9 @@
                                                         </div>
                                                         <div class="modal-card-body">
                                                             <a> Đến ngày </a>
-                                                            <input id="datepicker2" width="200" />
+                                                            <input id="datepicker4" class="greater-date-popular" width="200" />
                                                             <script>
-                                                                $('#datepicker2').datepicker({
+                                                                $('#datepicker4').datepicker({
                                                                     uiLibrary: 'bootstrap4'
                                                                 });
                                                             </script>
@@ -152,7 +151,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát </button>
-                                                <button type="button" class="btn btn-primary">Lưu </button>
+                                                <button type="button" class="btn btn-primary popular-product" id="time-doanhthu" data-content="Khac">Lưu </button>
                                             </div>
                                         </div>
                                     </div>
@@ -161,7 +160,17 @@
                         </div>
                         <!-- Noti Body -->
                         <div class="most_product_area">
+                            <table id="popular-product" class="table table-striped table-hover" style="margin-bottom:0px;">
+<!--                                <tr ng-repeat="product in PopularProducts" class="ng-scope">-->
+<!--                                    <td class="ng-binding">-->
+<!--                                        Kẹo extar xylitol bac hà hũ 56g-->
+<!--                                    </td>-->
+<!--                                    <td class="text-right">-->
+<!--                                        <span class="label label-danger ng-binding">90</span>-->
+<!--                                    </td>-->
 
+                                </tr>
+                            </table>
                         </div>
                     </div>
 
@@ -274,6 +283,10 @@
 
 <!-- Core plugin JavaScript-->
 <script src="javascripts/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="javascripts/datatables/jquery.dataTables.min.js"></script>
+<script src="javascripts/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level plugins -->
 <script src="javascripts/chart.js/Chart.min.js"></script>

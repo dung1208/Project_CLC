@@ -31,16 +31,12 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 document.getElementsByClassName("dashboard-data").disabled = true;
 var ctx = document.getElementById("myAreaChart");
 var dataArea = $(".dashboard-data").data("doanhthu");
+var ordersData = $(".dashboard-data").data("lai");
 
-var label = [];
-var c = 0;
-var data = [];
-var index_data = {};
-var myLineChart = null;
-myLineChart = new Chart(ctx, {
+var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: label,
+    labels: [],
     datasets: [{
       label: "Earnings",
       lineTension: 0.3,
@@ -54,7 +50,7 @@ myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: data,
+      data: [],
     }],
   },
   options: {
@@ -130,64 +126,38 @@ let elementDoanhThu = document.getElementsByClassName("time-doanhthu");
 for (i = 0; i < elementDoanhThu.length; i++) {
   elementDoanhThu[i].onclick = function () {
     myLineChart.destroy();
-    label = [];
-    c = 0;
-    data = [];
-    index_data = {};
+    let label = [];
+    let c = 0;
+    let data = [];
+    let index_data = {};
 
     let type = $(this).data('content');
-    let now = new Date();
-    var lowerDay = null;
-    var greaterDay = null;
-    if (type === "this_month") {
-      lowerDay = new Date(now.getFullYear(), now.getMonth(), 1);
-      greaterDay = new Date();
-    }
-    if (type === "previous_month") {
-      lowerDay = new Date(now.getFullYear(), now.getMonth(), 1);
-      greaterDay = new Date();
-      var newMonth = now.getMonth() - 1;
-      if (newMonth < 0) {
-        newMonth += 12;
-        greaterDay.setYear(now.getYear() - 1);
-        lowerDay.setYear(now.getYear() - 1);
-      }
-      greaterDay.setMonth(newMonth + 1);
-      greaterDay.setDate(0);
-      lowerDay.setMonth(newMonth);
-    }
-    if (type === "Khac") {
-      lowerDay = $('.lower-date-dt').datepicker({dateFormat: 'yy-mm-dd'}).val();
-      greaterDay = $('.greater-date-dt').datepicker({dateFormat: 'yy-mm-dd'}).val();
-      lowerDay = new Date(lowerDay);
-      greaterDay = new Date(greaterDay);
-      // if(new Date(lowerDay) <= new Date(greaterDay))
-      // {//compare end <=, not >=
-      //   console.log(true);
-      // }
-    }
-      let labelDay = new Date(lowerDay);
 
-      while (labelDay <= greaterDay) {
-        let _label = Date2String(labelDay);
-        label.push(_label);
-        data.push(0);
-        index_data[_label] = c;
-        c += 1;
-        labelDay.setDate(labelDay.getDate() + 1);
-      }
+    let filterDay = DayFilter(type, "doanhthu");
+    let lowerDay = filterDay[0];
+    let greaterDay = filterDay[1];
+    let labelDay = new Date(lowerDay);
 
-      for (let index = 0; index < dataArea.length; index++) {
-        let item = dataArea[index];
-        let order_date = new Date(item.Order_date);
-        let orderDate = new Date(order_date.getFullYear(), order_date.getMonth(), order_date.getDate());
+    while (labelDay <= greaterDay) {
+      let _label = Date2String(labelDay);
+      label.push(_label);
+      data.push(0);
+      index_data[_label] = c;
+      c += 1;
+      labelDay.setDate(labelDay.getDate() + 1);
+    }
 
-        if (lowerDay <= orderDate && orderDate <= greaterDay) {
-          let _order_date = Date2String(orderDate);
-          let _index = index_data[_order_date];
-          data[_index] += +item.Order_total;
-        }
+    for (let index = 0; index < dataArea.length; index++) {
+      let item = dataArea[index];
+      let order_date = new Date(item.Order_date);
+      let orderDate = new Date(order_date.getFullYear(), order_date.getMonth(), order_date.getDate());
+
+      if (lowerDay <= orderDate && orderDate <= greaterDay) {
+        let _order_date = Date2String(orderDate);
+        let _index = index_data[_order_date];
+        data[_index] += +item.Order_total;
       }
+    }
 
       // chart line
       myLineChart = new Chart(ctx, {
@@ -280,7 +250,73 @@ for (i = 0; i < elementDoanhThu.length; i++) {
     }
 }
 
+let elementProductPopular = document.getElementsByClassName("popular-product");
 
+for (i = 0; i < elementProductPopular.length; i++) {
+  elementProductPopular[i].onclick = function () {
+    // $('#popular-product').dataTable( {
+    //   "destroy": true
+    // } );
+    let data = {};
+    let type = $(this).data('content');
+
+    let filterDay = DayFilter(type, "popular");
+    let lowerDay = filterDay[0];
+    let greaterDay = filterDay[1];
+
+    let labelDay = new Date(lowerDay);
+
+    // while (labelDay <= greaterDay) {
+    //   let _label = Date2String(labelDay);
+    //   label.push(_label);
+    //   labelDay.setDate(labelDay.getDate() + 1);
+    // }
+
+    for (let index = 0; index < ordersData.length; index++) {
+      let item = ordersData[index];
+      let order_date = new Date(item.Order_date);
+      let orderDate = new Date(order_date.getFullYear(), order_date.getMonth(), order_date.getDate());
+
+      if (lowerDay <= orderDate && orderDate <= greaterDay) {
+        let key_product = item.Product_id;
+        if (data.hasOwnProperty(key_product)) {
+          data[key_product]["total"] += item.Quantity;
+        }
+        else {
+          data[key_product] = {};
+          data[key_product]["name"] = item.Product_name;
+          data[key_product]["total"] = item.Quantity;
+        }
+      }
+    }
+
+    let result = Object.keys(data).map(function(key) {
+      return data[key];
+    });
+
+    result = result.sort(function(a, b){
+      return (b.total - a.total);
+    });
+
+    result = result.slice(0, 10);
+
+    // $('#popular-product').dataTable().fnDestroy();
+    $('#popular-product').DataTable( {
+      "destroy": true,
+      data: result,
+      columns: [
+        { data: 'name' },
+        { data: 'total' }
+      ],
+      "paging":   false,
+      "ordering": false,
+      "info":     false,
+      "searching":   false,
+      "scrollY":  "360px",
+      "scrollCollapse": true
+    } );
+  }
+}
 /**
  * @return {string}
  */
@@ -293,32 +329,50 @@ function Date2String(d) {
 }
 
 
-function DayFilter(type) {
+function DayFilter(type, grid) {
   let _lowerDay = null;
   let _greaterDay = null;
   let now = new Date();
+  if (type === "today") {
+    _lowerDay = new Date();
+    _greaterDay = new Date();
+  }
+  if (type === "yesterday") {
+    _lowerDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() -1);
+    _greaterDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() -1);
+  }
+  if (type === "7ago") {
+    _lowerDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() -7);
+    _greaterDay = new Date();
+  }
   if (type === "this_month") {
     _lowerDay = new Date(now.getFullYear(), now.getMonth(), 1);
-    greaterDay = new Date();
+    _greaterDay = new Date();
   }
   if (type === "previous_month") {
     _lowerDay = new Date(now.getFullYear(), now.getMonth(), 1);
-    greaterDay = new Date();
+    _greaterDay = new Date();
     var newMonth = now.getMonth() - 1;
     if(newMonth < 0){
       newMonth += 12;
-      greaterDay.setYear(now.getYear() - 1);
+      _greaterDay.setYear(now.getYear() - 1);
       _lowerDay.setYear(now.getYear() - 1);
     }
-    greaterDay.setMonth(newMonth+1);
-    greaterDay.setDate(0);
+    _greaterDay.setMonth(newMonth+1);
+    _greaterDay.setDate(0);
     _lowerDay.setMonth(newMonth);
   }
   if (type === "Khac") {
-    lowerDay = $('.lower-date-dt').datepicker({ dateFormat: 'yy-mm-dd' }).val();
-    greaterDay = $('.greater-date-dt').datepicker({ dateFormat: 'yy-mm-dd' }).val();
-    lowerDay = new Date(lowerDay);
-    greaterDay = new Date(greaterDay);
+    if (grid === "doanhthu") {
+      _lowerDay = $('.lower-date-dt').datepicker({dateFormat: 'yy-mm-dd'}).val();
+      _greaterDay = $('.greater-date-dt').datepicker({dateFormat: 'yy-mm-dd'}).val();
+    }
+    if (grid === "popular") {
+      _lowerDay = $('.lower-date-popular').datepicker({dateFormat: 'yy-mm-dd'}).val();
+      _greaterDay = $('.greater-date-popular').datepicker({dateFormat: 'yy-mm-dd'}).val();
+    }
+    _lowerDay = new Date(_lowerDay);
+    _greaterDay = new Date(_greaterDay);
     // if(new Date(lowerDay) <= new Date(greaterDay))
     // {//compare end <=, not >=
     //   console.log(true);
@@ -329,3 +383,4 @@ function DayFilter(type) {
 }
 
 $('.this_month').click();
+$('.today').click();
