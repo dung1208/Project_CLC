@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="/images/logo.png">
+    <link rel="stylesheet" href="/stylesheets/header-manager.css">
+    <link rel="stylesheet" href="/stylesheets/orders.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <title>Danh sách hàng hóa</title>
+
+    <!-- Custom styles for this page -->
+    <link href="/stylesheets/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+
+<body>
+<% include ../layout/header-manager %>
+<div class="content-page">
+    <div class="table-orders">
+        <div class="header-table-orders">
+            <h1>DANH SÁCH ĐƠN BÁN HÀNG</h1>
+<!--            <div class="pull-right">-->
+<!--                <button type="button" class="btn btn-primary" id="add-newProduct" ><i class="fas fa-plus-circle"></i>-->
+<!--                    &lt;!&ndash;                        <a class="btn-primary" href="/product/add">THÊM MỚI HÀNG HOÁ</a>&ndash;&gt;-->
+<!--                    DANH SÁCH ĐƠN BÁN HÀNG-->
+<!--                </button>-->
+<!--            </div>-->
+        </div>
+        <div class="list-orders">
+            <table class="table table-hover" id="dataTable">
+                <thead>
+                <tr class="title-table-orders">
+                    <th class="blank-col"></th>
+                    <th class="code-order-col">Mã chứng từ</th>
+                    <th class="custom-order-col">Khách hàng</th>
+                    <th class="date-order-col">Ngày bán</th>
+                    <th class="sum-order-col">Tổng cộng</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% for(var i = 0; i< data.length; i++) { %>
+                    <tr class="element-order" data-product="<%= JSON.stringify(data[i])%>">
+                        <th scope="row"><%= (i+1) %></th>
+                        <td>
+                            <div class="code-order"><%= data[i].Order_id%></div>
+                        </td>
+                        <td class="custom-order"><%= data[i].Cus_name%></td>
+                        <td class="date-order"><%= data[i].Order_date%></td>
+                        <td class="sum-order"><%= data[i].Order_total%></td>
+                    </tr>
+                <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/javascripts/header-manager.js"></script>
+
+<!-- Bootstrap core JavaScript-->
+<script src="/javascripts/jquery/jquery.min.js"></script>
+<!--<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+
+<!-- Core plugin JavaScript-->
+<script src="javascripts/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="javascripts/datatables/jquery.dataTables.min.js"></script>
+<script src="javascripts/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="javascripts/demo/datatables-demo.js"></script>
+
+</html>

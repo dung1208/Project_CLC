@@ -2,7 +2,9 @@ const dbCon = require('../lib/db')
 
 module.exports = {
     get_list_orders: function (storeId, callback) {
-        dbCon.query('SELECT * FROM orders WHERE Store_id = "'+ storeId + '"', callback)
+        dbCon.query('SELECT o.Order_id, o.Staff_id, o.Store_id, o.Cus_id, o.Order_date, o.Order_discount, o.Order_total, c.Cus_name\n' +
+            'FROM orders AS o, customer AS c \n' +
+            'WHERE o.Cus_id = c.Cus_id AND Store_id = "'+ storeId + '"', callback)
     },
 
     get_orders: function (store_id, callback) {
