@@ -1,16 +1,21 @@
-var index_product= 1; //index_productfor table row
+var index_product= 0; //index_product for table row
+var index_table = 0;
 var totalBill = 0;
 var el = document.querySelector("#autoComplete");
-// //indexChange for right-table
-// function indexChange(i){
-// 	index_product+= i;
-// 	document.getElementsByClassName("text-right")[0].firstElementChild.innerHTML = index_product- 1;
-// }; 
-// //totalBillChange for 
-// function totalBillChange (amountChange){
-// 	totalBill += amountChange;
-// 	document.getElementsByClassName("text-right")[1].firstElementChild.innerHTML = totalBill;
-// };
+//Process multiple class elements
+function clickedClassHandler(name,target,callback) {
+
+	// apply click handler to all elements with matching className
+	var allElements = document.body.getElementsByClassName(name);
+
+	for(var x = 0, len = allElements.length; x < len; x++) {
+		if(allElements[x] == target) {
+			allElements[x].onclick = callback.call(this,x);
+			break;
+		}
+	}
+};
+
 if(el){
 	el.addEventListener("autoComplete", event => {
 		console.log(event);
@@ -32,8 +37,6 @@ const autoCompletejs = new autoComplete({
 			document
 				.querySelector("#autoComplete")
 				.setAttribute("placeholder", "Tìm kiếm mặt hàng");
-			// Returns Fetched data
-			console.log(data);
 			return data;
 		},
 		key: ["Product_name", "Product_id", "Product_price"],
@@ -70,15 +73,15 @@ const autoCompletejs = new autoComplete({
 		document.querySelector("#autoComplete_list").appendChild(result);
 	},
 	onSelection: feedback => {
-		const table = document.getElementsByClassName("table table-striped table-listProducts")[0];
+		const table = document.getElementsByClassName("table table-striped table-listProducts")[0].tBodies[0];
 		const data = feedback.selection.value;
 		//Create rows 
-		var row = table.insertRow(index_product);
+		var row = table.insertRow(index_table);
 		row.className = "product-list";
 		//Create cells in row
 		var cell_orderID = row.insertCell(0);
 		cell_orderID.className = "order-product";
-		cell_orderID.innerHTML = index_product;
+		cell_orderID.innerHTML = index_table + 1;
 
 		var cell_codeProduct = row.insertCell(1);
 		cell_codeProduct.className = "code-product";
@@ -95,30 +98,40 @@ const autoCompletejs = new autoComplete({
 		var cell_amountProduct = row.insertCell(4);
 		cell_amountProduct.className = "amount-product";
 
-		var minusAmountITag = document.createElement("button");
-		minusAmountITag.className = "fas fa-minus";
+		var minusAmountBt = document.createElement("input");
+		minusAmountBt.className = "fas fa-minus";
+		minusAmountBt.type = "button";
+		minusAmountBt.value = "-";
 
 		var inputAmount = document.createElement("input");
 		inputAmount.className = "form-control input-info-product";
 		inputAmount.type = "text";
 		inputAmount.defaultValue = 1;
 
-		var plusAmountITag = document.createElement("input");
-		plusAmountITag.className = "fas fa-plus";
-		plusAmountITag.type = "button";
+		var plusAmountBt = document.createElement("input");
+		plusAmountBt.className = "fas fa-plus";
+		plusAmountBt.type = "button";
+		plusAmountBt.value = "+";
 
-		cell_amountProduct.appendChild(minusAmountITag);
+		cell_amountProduct.appendChild(minusAmountBt);
 		cell_amountProduct.appendChild(inputAmount);
-		cell_amountProduct.appendChild(plusAmountITag);
+		cell_amountProduct.appendChild(plusAmountBt);
 
 		var cell_totalPrice = row.insertCell(5);
 		cell_totalPrice.className = "total-price";
 		cell_totalPrice.innerHTML = parseFloat(cell_priceProduct.innerHTML) * parseFloat(inputAmount.value);
 
 		var cell_deleteProduct = row.insertCell(6);
-		cell_totalPrice.className = "total-price";
+		cell_deleteProduct.className = "delete-product";
+		var deleteBt = document.createElement("input");
+		deleteBt.className = "far fa-trash-alt";
+		deleteBt.type = "button";
+		deleteBt.value = "Del";
+		cell_deleteProduct.appendChild(deleteBt);
+		
+		index_table += 1;
 		index_product += 1;
-		document.getElementsByClassName("text-right")[0].firstElementChild.innerHTML = index_product- 1;	
+		document.getElementsByClassName("text-right")[0].firstElementChild.innerHTML = index_product;	
 		totalBill += parseFloat(cell_totalPrice.innerHTML);
 		document.getElementsByClassName("text-right")[1].firstElementChild.innerHTML = totalBill;
 		// Clear Input
@@ -146,35 +159,60 @@ const autoCompletejs = new autoComplete({
 	});
   });
 }
-// Plus button click event
 
-var plusBt_elements = document.getElementsByClassName("fas fa-plus");
-	Array.from(plusBt_elements).forEach( (amount_element,index) =>{
-	amount_element.click =  function (){
-	var amount = parseFloat(document.getElementsByClassName("form-control input-info-product")[index].innerHTML);
-	document.getElementsByClassName("form-control input-info-product")[index].innerHTML = amount + 1;
-	var totalPrice = parseFloat(document.getElementsByClassName("total-price")[index].innerHTML);
-	document.getElementsByClassName("total-price")[index].innerHTML = totalPrice + parseFloat(cell_priceProduct.innerHTML);
-	index_product+= 1;
-	document.getElementsByClassName("text-right")[0].firstElementChild.innerHTML = index_product- 1;	
-	totalBill += parseFloat(cell_totalPrice.innerHTML);
-	document.getElementsByClassName("text-right")[1].firstElementChild.innerHTML = totalBill;
-	};
-});
-// //Minus button click event
-// var minusBt_elements = document.getElementsByClassName("fa-minus");
-// Array.from(minusBt_elements).forEach((amount_element,index) =>{
-// 	amount_element.click = function(event){
-// 		console.log(event.target.tagName);
-// 		var amount = parseFloat(document.getElementsByClassName("form-control input-info-product")[index].innerHTML);
-// 		document.getElementsByClassName("form-control input-info-product")[index].innerHTML = amount - 1;
-// 		var totalPrice = parseFloat(document.getElementsByClassName("total-price")[index].innerHTML);
-// 		document.getElementsByClassName("total-price")[index].innerHTML = totalPrice - parseFloat(cell_priceProduct.innerHTML);
-// 		index_product-= 1;
-// 		document.getElementsByClassName("text-right")[0].firstElementChild.innerHTML = index_product- 1;	
-// 		totalBill -= parseFloat(cell_totalPrice.innerHTML);
-// 		document.getElementsByClassName("text-right")[1].firstElementChild.innerHTML = totalBill;
-// 	};
-// });
-
+//Increase, decrease, delete button for each row
+let rootElement = document.getElementsByClassName('table table-striped table-listProducts')[0].tBodies[0];
+//since the root element is set to be body for our current dealings
+rootElement.addEventListener("click", function (evt) {
+		var targetElement = evt.target;
+		while (targetElement != null) {
+			if (targetElement.classList.contains("fa-plus")) {
+				clickedClassHandler("fas fa-plus",targetElement,function(index){
+					var amount = parseFloat(document.getElementsByClassName("form-control input-info-product")[index].value);
+					if(amount > 0){
+					document.getElementsByClassName("form-control input-info-product")[index].value = amount + 1;
+					var totalPrice = parseFloat(document.getElementsByClassName("total-price")[index + 1].innerHTML);
+					document.getElementsByClassName("total-price")[index + 1].innerHTML = totalPrice + parseFloat(document.getElementsByClassName("price-product")[index].innerHTML);
+					index_product += 1;
+					document.getElementsByClassName("text-right")[0].firstElementChild.innerHTML = index_product;	
+					totalBill += parseFloat(document.getElementsByClassName("price-product")[index].innerHTML);
+					document.getElementsByClassName("text-right")[1].firstElementChild.innerHTML = totalBill;
+					}
+				});
+				break;
+			} else if (targetElement.classList.contains("fa-minus")) {
+				clickedClassHandler("fas fa-minus",targetElement,function(index){
+					var amount = parseFloat(document.getElementsByClassName("form-control input-info-product")[index].value);
+					if (amount > 2){
+					document.getElementsByClassName("form-control input-info-product")[index].value = amount - 1;
+					var totalPrice = parseFloat(document.getElementsByClassName("total-price")[index + 1].innerHTML);
+					document.getElementsByClassName("total-price")[index + 1].innerHTML = totalPrice - parseFloat(document.getElementsByClassName("price-product")[index].innerHTML);
+					index_product-= 1;
+					document.getElementsByClassName("text-right")[0].firstElementChild.innerHTML = index_product;	
+					totalBill -= parseFloat(document.getElementsByClassName("price-product")[index].innerHTML);
+					document.getElementsByClassName("text-right")[1].firstElementChild.innerHTML = totalBill;
+					}
+				});
+				break;
+			} else if(targetElement.classList.contains("fa-trash-alt")) {
+				clickedClassHandler("far fa-trash-alt",targetElement,function(index){
+					var amount = parseFloat(document.getElementsByClassName("form-control input-info-product")[index].value);
+					var totalPrice = parseFloat(document.getElementsByClassName("total-price")[index + 1].innerHTML);
+					index_product-= amount;
+					document.getElementsByClassName("text-right")[0].firstElementChild.innerHTML = index_product;
+					totalBill -= totalPrice;
+					document.getElementsByClassName("text-right")[1].firstElementChild.innerHTML = totalBill;
+					//Remove <tr>
+					rootElement.removeChild(targetElement.parentElement.parentNode);
+					index_table -= 1;
+				});
+				break;
+			} else {
+				evt.stopPropagation();
+			}
+			targetElement = targetElement.parentElement;
+		}
+	},
+	true
+);
 
