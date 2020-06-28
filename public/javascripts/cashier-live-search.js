@@ -1,6 +1,7 @@
-var index_product= 0; //index_product for table row
-var index_table = 0;
+var index_product= 0; //index of total product 
+var index_table = 0; //index for table rows
 var totalBill = 0;
+var index_bill = 1;
 var el = document.querySelector("#autoComplete");
 //Process multiple class elements
 function clickedClassHandler(name,target,callback) {
@@ -39,7 +40,7 @@ const autoCompletejs = new autoComplete({
 				.setAttribute("placeholder", "Tìm kiếm mặt hàng");
 			return data;
 		},
-		key: ["Product_name", "Product_id", "Product_price"],
+		key: ["Product_name", "Product_id", "Product_price", "Product_unit"],
 		cache: false
 	},
 
@@ -129,6 +130,10 @@ const autoCompletejs = new autoComplete({
 		deleteBt.value = "Del";
 		cell_deleteProduct.appendChild(deleteBt);
 		
+		var cell_productUnit = row.insertCell(7);
+		cell_productUnit.className = "product-unit";
+		cell_productUnit.innerHTML = data.Product_small_unit;
+
 		index_table += 1;
 		index_product += 1;
 		document.getElementsByClassName("text-right")[0].firstElementChild.innerHTML = index_product;	
@@ -215,4 +220,73 @@ rootElement.addEventListener("click", function (evt) {
 	},
 	true
 );
+
+//Pay button
+let payBt = document.getElementsByClassName("btn-pay btn-danger")[0];
+payBt.addEventListener("click", async function(){
+	function getProductsDetails(){
+		var date = new Date();
+		var table_body = document.getElementsByClassName('table table-striped table-listProducts')[0].tBodies[0].children;
+		var order_detail = [
+			'HD' + date.toISOString().slice(2,10).replace(/[-]/g, '') + '-' + index_bill.toString().padStart(4, "0"),
+			'STAFF-0003',
+			'STORE-0001',
+			'KH-0000',
+			date.toISOString().slice(0, 19).replace('T', ' '),
+			0,
+			parseFloat(document.getElementsByClassName("text-right")[1].firstElementChild.innerHTML),
+		]
+		var order_product_details = [];
+		for(var index = 0, len = table_body.length; index < len; index++) {
+			var order_list_product = [
+				'HD' + date.toISOString().slice(2,10).replace(/[-]/g, '') + '-' + index_bill.toString().padStart(4, "0"),
+				document.getElementsByClassName("code-product")[index].innerHTML,
+				document.getElementsByClassName("product-unit")[index].innerHTML,
+				parseFloat(document.getElementsByClassName("form-control input-info-product")[index].value),
+				parseFloat(document.getElementsByClassName("price-product")[index].innerHTML),
+				0,
+				parseFloat(document.getElementsByClassName("total-price")[index + 1].innerHTML),
+			];
+			order_product_details.push(order_list_product)
+		}
+		console.log(order_detail);
+		console.log(order_product_details);
+		var data = {
+			data_order: order_detail,
+			datas_order_product: order_product_details,
+		}
+		return data;
+	}
+
+	const data = getProductsDetails();
+	const option = {
+		method: 'POST',
+		headers: {
+			'Accept':' application/json',
+			'Content-Type' : 'application/json',
+		},
+		body: JSON.stringify(data),
+	}
+	console.log(option.body)
+	await fetch('/cashier/submit',option).then(function(response) {                      // first then()
+		if(response.ok)
+		{
+		  return response.text();         
+		}
+  
+		throw new Error('Something went wrong.');
+	})  
+	.then(function(text) {                          // second then()
+	  console.log('Request successful', text);  
+	})  
+	.catch(function(error) {                        // catch
+	  console.log('Request failed', error);
+	});;
+	//Reset page variable
+	index_product = 0;
+	index_table = 0;
+	totalBill = 0;
+	index_bill += 1;
+	rootElement.innerHTML = "";
+})
 
