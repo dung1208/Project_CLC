@@ -228,7 +228,7 @@ payBt.addEventListener("click", async function(){
 		var date = new Date();
 		var table_body = document.getElementsByClassName('table table-striped table-listProducts')[0].tBodies[0].children;
 		var order_detail = [
-			'HD' + date.toISOString().slice(2,10).replace(/[-]/g, '') + '-' + index_bill.toString().padStart(4, "0"),
+			'HD' + date.toISOString().slice(2,19).replace(/[-T:]/g, ''),
 			'STAFF-0003',
 			'STORE-0001',
 			'KH-0000',
@@ -239,7 +239,7 @@ payBt.addEventListener("click", async function(){
 		var order_product_details = [];
 		for(var index = 0, len = table_body.length; index < len; index++) {
 			var order_list_product = [
-				'HD' + date.toISOString().slice(2,10).replace(/[-]/g, '') + '-' + index_bill.toString().padStart(4, "0"),
+				'HD' + date.toISOString().slice(2,19).replace(/[-T:]/g, ''),
 				document.getElementsByClassName("code-product")[index].innerHTML,
 				document.getElementsByClassName("product-unit")[index].innerHTML,
 				parseFloat(document.getElementsByClassName("form-control input-info-product")[index].value),
