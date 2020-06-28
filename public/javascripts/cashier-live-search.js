@@ -1,7 +1,7 @@
 var index_product= 0; //index of total product 
 var index_table = 0; //index for table rows
 var totalBill = 0;
-var index_bill = 1;
+var index_bill = 0;
 var el = document.querySelector("#autoComplete");
 //Process multiple class elements
 function clickedClassHandler(name,target,callback) {
