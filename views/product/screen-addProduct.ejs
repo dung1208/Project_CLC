@@ -17,6 +17,9 @@
 
 <body>
 <% include ../layout/header-manager %>
+<% if (messages.error) { %>
+    <div class="alert alert-danger" role="alert"><%- messages.error %></div>
+<% } %>
 <div class="content-page">
     <div class="content-header">
         <h1>THÊM MỚI HÀNG HOÁ</h1>
@@ -33,75 +36,67 @@
         </ul>
 
         <!-- Tab panes -->
-        <div class="tab-content">
             <div class="tab-pane active" id="detail">
-                <div class="content-details">
-                    <div class="content-details1">
-                        <div class="form-group">
-                            <label>Mã hàng hoá / SKU / Mã vạch</label>
-                            <input type="text" class="form-control" placeholder="Tự động tạo mã">
+                <form action="/product/add" method="post">
+                    <div class="content-details">
+                        <div class="content-details1">
+                            <div class="form-group">
+                                <label>Mã hàng hoá / SKU / Mã vạch</label>
+                                <input name="id" type="text" class="form-control" placeholder="Tự động tạo mã">
+                            </div>
+                            <div class="form-group">
+                                <label>Tên hàng hoá</label>
+                                <input name="name" type="text" class="form-control" required pattern=".*\S+.*" title="This field is required" placeholder="Tên hàng hoá">
+                            </div>
+                            <div class="form-group">
+                                <label>Giá bán</label>
+                                <input name="price" type="number" required pattern=".*\S+.*" title="This field is required" step="any" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Giá vốn</label>
+                                <input name="origin_price" type="number" required pattern=".*\S+.*" title="This field is required" step="any" class="form-control">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Tên hàng hoá</label>
-                            <input type="text" class="form-control" placeholder="Tên hàng hoá">
+                        <div class="content-details2">
+                            <div class="form-group">
+                                <label> Nhiều mã vạch</label>
+                                <input type="text" class="form-control" placeholder="Mã vạch 2">
+                                <input type="text" class="form-control" placeholder="Mã vạch 3">
+                                <input type="text" class="form-control" placeholder="Mã vạch 4">
+                                <input type="text" class="form-control" placeholder="Mã vạch 5">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Giá bán</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>Giá vốn</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="content-details2">
-                        <div class="form-group">
-                            <label> Nhiều mã vạch</label>
-                            <input type="text" class="form-control" placeholder="Mã vạch 2">
-                            <input type="text" class="form-control" placeholder="Mã vạch 3">
-                            <input type="text" class="form-control" placeholder="Mã vạch 4">
-                            <input type="text" class="form-control" placeholder="Mã vạch 5">
-                        </div>
-                    </div>
-                    <div class="content-details3">
-                        <div class="form-group">
-                            <label for="select-group">Loại hàng</label>
-                            <select class="form-control" id="select-group">
-                                <option>Hàng hoá</option>
-                                <option>Dịch vụ</option>
-                                <option>Combo</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="select-group">Tên nhóm</label>
-                            <select class="form-control" id="select-group">
-                                <option>Thuốc lá</option>
-                                <option>Nước ngọt</option>
-                                <option>Mỹ phẩm</option>
-                                <option>Bánh kẹo</option>
-                                <option>Văn phòng phẩm</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Tồn kho</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>VAT(%)</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" value="">Quản lý theo số lô & hạn sử
-                                dụng ?
-                            </label>
+                        <div class="content-details3">
+                            <div class="form-group">
+                                <label for="select-group">Tên nhóm</label>
+                                <select name="product_group" class="form-control" id="select-group">
+                                    <option value="">Không có</option>
+                                    <option value="Thuốc lá">Thuốc lá</option>
+                                    <option value="ĐỒ TRẺ EM">ĐỒ TRẺ EM</option>
+                                    <option value="MỸ PHẨM">Mỹ phẩm</option>
+                                    <option value="ĐỒ SINH HOẠT CÁ NHÂN">ĐỒ SINH HOẠT CÁ NHÂN</option>
+                                    <option value="GIA VỊ">GIA VỊ</option>
+                                    <option value="ĐỒ GIA DỤNG">ĐỒ GIA DỤNG</option>
+                                    <option value="Văn Phòng Phẩm">Văn Phòng Phẩm</option>
+                                    <option value="ĐỒ UỐNG SỮA">ĐỒ UỐNG SỮA</option>
+                                    <option value="ĐỒ UỐNG NƯỚC">ĐỒ UỐNG NƯỚC</option>
+                                    <option value="ĐỒ LÓT">ĐỒ LÓT</option>
+                                    <option value="Kem">Kem</option>
+                                    <option value="HÀNG NHẬP KHẨU">HÀNG NHẬP KHẨU</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Tồn kho</label>
+                                <input name="quantity" type="number" class="form-control">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="btn-nav">
-                    <button type="button" class="btn btn-primary"><i class="fas fa-save"></i> Lưu</button>
-                    <button type="button" class="btn btn-warning">Thoát <i class="fas fa-forward"></i></i></button>
-                </div>
+                    <div class="btn-nav">
+<!--                        <button type="button" class="btn btn-primary"><i class="fas fa-save"></i> Lưu</button>-->
+                        <input type="submit" class="btn btn-primary" value="Lưu">
+                        <button type="button" class="btn btn-warning">Thoát <i class="fas fa-forward"></i></button>
+                    </div>
+                </form>
             </div>
             <div class="tab-pane fade" id="moreInformation">
                 <div class="form-group">

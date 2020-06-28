@@ -23,5 +23,13 @@ module.exports = {
 
     delete: function (product_id, callback) {
         dbCon.query('DELETE FROM product WHERE Product_id = "'+ product_id + '"', callback)
+    },
+
+    add: function (form_data, callback) {
+        dbCon.query('INSERT INTO product SET ?', form_data, callback)
+    },
+
+    add_to_store: function (form_data, callback) {
+        dbCon.query('INSERT INTO store_product SET ?', form_data, callback)
     }
 }
