@@ -30,6 +30,9 @@ module.exports = {
                 req.flash('error', err);
                 res.render("exchange/orders", {data:''});
             } else {
+                for (let i=0; i<results.length; i++) {
+                    results[i]["Order_date"] = results[i]["Order_date"].toISOString().substr(0, 19).replace('T', ' ');
+                }
                 res.render("exchange/orders", {data:results});
                 // res.json({data:results});
             }
@@ -62,9 +65,26 @@ module.exports = {
             if (err){
                 res.render("exchange/orderstock", {data:''});
             } else {
+                for (let i=0; i<results.length; i++) {
+                    results[i]["OS_date"] = results[i]["OS_date"].toISOString().substr(0, 19).replace('T', ' ');
+                }
                 res.render("exchange/orderstock", {data:results});
                 // res.json({data:results});
             }
         })
     }
 };
+
+/**
+ * @return {string}
+ */
+function Date2String(d) {
+    let _month = d.getMonth()+1;
+    let _day = d.getDate();
+    let _year = d.getFullYear();
+    let _hour = d.getHours();
+    let _min = d.getMinutes();
+    let _sec = d.getSeconds();
+
+    return  _day +"/"+ _month +"/"+ _year + " " + _hour + ":" + _min + ":" + _sec;
+}

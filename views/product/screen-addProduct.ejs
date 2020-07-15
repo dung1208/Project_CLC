@@ -57,15 +57,7 @@
                                 <input name="origin_price" type="number" required pattern=".*\S+.*" title="This field is required" step="any" class="form-control">
                             </div>
                         </div>
-                        <div class="content-details2">
-                            <div class="form-group">
-                                <label> Nhiều mã vạch</label>
-                                <input type="text" class="form-control" placeholder="Mã vạch 2">
-                                <input type="text" class="form-control" placeholder="Mã vạch 3">
-                                <input type="text" class="form-control" placeholder="Mã vạch 4">
-                                <input type="text" class="form-control" placeholder="Mã vạch 5">
-                            </div>
-                        </div>
+
                         <div class="content-details3">
                             <div class="form-group">
                                 <label for="select-group">Tên nhóm</label>
@@ -76,6 +68,7 @@
                                     <option value="MỸ PHẨM">Mỹ phẩm</option>
                                     <option value="ĐỒ SINH HOẠT CÁ NHÂN">ĐỒ SINH HOẠT CÁ NHÂN</option>
                                     <option value="GIA VỊ">GIA VỊ</option>
+                                    <option value="BÁNH KẸO">BÁNH KẸO</option>
                                     <option value="ĐỒ GIA DỤNG">ĐỒ GIA DỤNG</option>
                                     <option value="Văn Phòng Phẩm">Văn Phòng Phẩm</option>
                                     <option value="ĐỒ UỐNG SỮA">ĐỒ UỐNG SỮA</option>
@@ -94,7 +87,7 @@
                     <div class="btn-nav">
 <!--                        <button type="button" class="btn btn-primary"><i class="fas fa-save"></i> Lưu</button>-->
                         <input type="submit" class="btn btn-primary" value="Lưu">
-                        <button type="button" class="btn btn-warning">Thoát <i class="fas fa-forward"></i></button>
+                        <button type="button" class="btn btn-warning" id="back_product">Thoát <i class="fas fa-forward"></i></button>
                     </div>
                 </form>
             </div>
@@ -110,5 +103,6 @@
 </div>
 </body>
 <script src="/javascripts/header-manager.js"></script>
+<script src="/javascripts/addProduct.js"></script>
 
 </html>

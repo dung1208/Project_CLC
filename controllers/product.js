@@ -1,4 +1,4 @@
-const ProductData = require("../model/product")
+const ProductData = require("../model/product");
 
 module.exports = {
     list_product: function (req, res, next) {
@@ -64,6 +64,12 @@ module.exports = {
         let product_group = req.body.product_group;
         let quantity = req.body.quantity;
 
+        if (!id) {
+            let now = new Date();
+            id = Date2String(now);
+            console.log(id);
+        }
+
         let product_form_data = {
             Product_id: id,
             Product_name: name,
@@ -77,7 +83,7 @@ module.exports = {
             Store_id: storeId,
             Product_id: id,
             Quantity: quantity
-        }
+        };
 
         // insert query
         ProductData.add(product_form_data, function(err, result) {
@@ -104,6 +110,19 @@ module.exports = {
                 })
             }
         })
-
     },
 };
+
+/**
+ * @return {string}
+ */
+function Date2String(d) {
+    let _month = d.getMonth()+1;
+    let _day = d.getDate();
+    let _year = d.getFullYear();
+    let _hour = d.getHours();
+    let _min = d.getMinutes();
+    let _sec = d.getSeconds();
+
+    return  _hour + "" +_min + _sec +_day + _month + _year;
+}
