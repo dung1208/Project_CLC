@@ -46,7 +46,29 @@ module.exports = {
     },
 
     display_edit_product: function (req, res) {
-        res.render('product/screen-addProduct', {data:''});
+        let id = req.params.id;
+        // let storeId = req.session.storeId;
+        var storeId="STORE-0001";
+        ProductData.get_id_from_store(id, storeId,function (err, results) {
+            // if product not found
+            if (results.length <= 0) {
+                req.flash('error', 'Product not found with id = ' + id)
+                res.redirect('/product')
+            }
+            // if product found
+            else {
+                // render edit
+                let name = results[0].Product_name;
+                let price = results[0].Product_small_unit_price;
+                let origin_price = results[0].Product_original_price;
+                let product_group = results[0].Product_group;
+                let quantity = results[0].Quantity;
+                res.render('product/editProduct', {id: id, name: name, price: price,
+                    origin_price: origin_price, product_group: product_group, quantity: quantity});
+                // res.json({data:results});
+            }
+        });
+
     },
 
     add: function (req, res, next) {
@@ -111,6 +133,58 @@ module.exports = {
             }
         })
     },
+
+    update: function (req, res) {
+        let id = req.params.id;
+        let storeId = req.session.storeId;
+        if (!storeId) {
+            req.flash('error', "Sửa sản phẩm không thành công")
+            return res.redirect('/product');
+        }
+
+        let name = req.body.name;
+        let price = req.body.price;
+        let origin_price = req.body.origin_price;
+        let product_group = req.body.product_group;
+        let quantity = req.body.quantity;
+
+        let product_form_data = {
+            Product_name: name,
+            Product_small_unit_price: price,
+            Product_original_price: origin_price,
+            Product_group: product_group,
+
+        };
+
+        let store_product_form_data = {
+            Quantity: quantity
+        };
+
+        ProductData.update(id, product_form_data, function(err, result) {
+            //if(err) throw err
+            if (err) {
+                req.flash('error', err)
+
+                // render to add.ejs
+                res.render('product/editProduct', {id: id, name: name, price: price,
+                    origin_price: origin_price, product_group: product_group, quantity: quantity})
+            } else {
+                ProductData.update_in_store(id, storeId, store_product_form_data, function (err, result) {
+                    if (err) {
+                        req.flash('error', err);
+
+                        // render to add.ejs
+                        res.render('product/editProduct', {id: id, name: name, price: price,
+                            origin_price: origin_price, product_group: product_group, quantity: quantity})
+                    } else {
+                        req.flash('success', 'Sửa sản phẩm thành công');
+
+                        res.redirect('/product');
+                    }
+                })
+            }
+        })
+    }
 };
 
 /**

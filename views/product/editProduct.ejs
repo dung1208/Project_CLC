@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="/images/logo.png">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/header-manager.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/screen-addProduct.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <title>Thêm hàng hóa</title>
+</head>
+
+<body>
+<% include ../layout/header-manager %>
+<% if (messages.error) { %>
+    <div class="alert alert-danger" role="alert"><%- messages.error %></div>
+<% } %>
+<div class="content-page">
+    <div class="content-header">
+        <h1>THÊM MỚI HÀNG HOÁ</h1>
+    </div>
+    <div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#detail">Chi tiết</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#moreInformation">Thông tin khác</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-pane active" id="detail">
+            <form action="/product/update/<%= id %>" method="post">
+                <div class="content-details">
+                    <div class="content-details1">
+                        <div class="form-group">
+                            <label>Mã hàng hoá / SKU / Mã vạch</label>
+                            <input name="id" type="text" class="form-control" placeholder="Tự động tạo mã" value="<%= id %>">
+                        </div>
+                        <div class="form-group">
+                            <label>Tên hàng hoá</label>
+                            <input name="name" type="text" class="form-control" required pattern=".*\S+.*"
+                                   title="This field is required" placeholder="Tên hàng hoá" value="<%= name %>">
+                        </div>
+                        <div class="form-group">
+                            <label>Giá bán</label>
+                            <input name="price" type="number" required pattern=".*\S+.*"
+                                   title="This field is required" step="any" class="form-control" value="<%= price %>">
+                        </div>
+                        <div class="form-group">
+                            <label>Giá vốn</label>
+                            <input name="origin_price" type="number" required pattern=".*\S+.*" title="This field is required"
+                                   step="any" class="form-control" value="<%= origin_price %>">
+                        </div>
+                    </div>
+
+                    <div class="content-details3">
+                        <div class="form-group">
+                            <label for="select-group">Tên nhóm</label>
+                            <select name="product_group" class="form-control" id="select-group">
+                                <option value="">Không có</option>
+                                <option value="Thuốc lá" <%= product_group == 'Thuốc lá' ? 'selected' : ''%>>Thuốc lá</option>
+                                <option value="ĐỒ TRẺ EM" <%= product_group == 'ĐỒ TRẺ EM' ? 'selected' : ''%>>ĐỒ TRẺ EM</option>
+                                <option value="MỸ PHẨM" <%= product_group == 'MỸ PHẨM' ? 'selected' : ''%>>Mỹ phẩm</option>
+                                <option value="ĐỒ SINH HOẠT CÁ NHÂN" <%= product_group == 'ĐỒ SINH HOẠT CÁ NHÂN' ? 'selected' : ''%>>ĐỒ SINH HOẠT CÁ NHÂN</option>
+                                <option value="GIA VỊ" <%= product_group == 'GIA VỊ' ? 'selected' : ''%>>GIA VỊ</option>
+                                <option value="BÁNH KẸO" <%= product_group == 'BÁNH KẸO' ? 'selected' : ''%>>BÁNH KẸO</option>
+                                <option value="ĐỒ GIA DỤNG" <%= product_group == 'ĐỒ GIA DỤNG' ? 'selected' : ''%>>ĐỒ GIA DỤNG</option>
+                                <option value="Văn Phòng Phẩm" <%= product_group == 'Văn Phòng Phẩm' ? 'selected' : ''%>>Văn Phòng Phẩm</option>
+                                <option value="ĐỒ UỐNG SỮA" <%= product_group == 'ĐỒ UỐNG SỮA' ? 'selected' : ''%>>ĐỒ UỐNG SỮA</option>
+                                <option value="ĐỒ UỐNG NƯỚC" <%= product_group == 'ĐỒ UỐNG NƯỚC' ? 'selected' : ''%>>ĐỒ UỐNG NƯỚC</option>
+                                <option value="ĐỒ LÓT" <%= product_group == 'ĐỒ LÓT' ? 'selected' : ''%>>ĐỒ LÓT</option>
+                                <option value="Kem" <%= product_group == 'Kem' ? 'selected' : ''%>>Kem</option>
+                                <option value="HÀNG NHẬP KHẨU" <%= product_group == 'HÀNG NHẬP KHẨU' ? 'selected' : ''%>>HÀNG NHẬP KHẨU</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tồn kho</label>
+                            <input name="quantity" type="number" class="form-control" value="<%= quantity %>">
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-nav">
+                    <!--                        <button type="button" class="btn btn-primary"><i class="fas fa-save"></i> Lưu</button>-->
+                    <input type="submit" class="btn btn-primary" value="Lưu">
+                    <button type="button" class="btn btn-warning" id="back_product">Thoát <i class="fas fa-forward"></i></button>
+                </div>
+            </form>
+        </div>
+        <div class="tab-pane fade" id="moreInformation">
+            <div class="form-group">
+                <label>Ghi chú nhanh khi bán hàng</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+</body>
+<script src="/javascripts/header-manager.js"></script>
+<script src="/javascripts/addProduct.js"></script>
+
+</html>
