@@ -43,7 +43,7 @@ app.use('/', indexRouter);
 app.use('/cashier',cashierRouter);
 app.use('/users', usersRouter);
 app.use('/product', productRouter);
-app.use('/login', loginRouter);
+app.use('/', loginRouter);
 app.use('/', exchangeRouter);
 app.use('/staff', staffRouter);
 
