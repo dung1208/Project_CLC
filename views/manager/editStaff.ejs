@@ -37,26 +37,29 @@
 
         <!-- Tab panes -->
         <div class="tab-pane active" id="detail">
-            <form action="/staff/add" method="post">
+            <form action="/staff/update/<%= id %>" method="post">
                 <div class="content-details">
                     <div class="content-details1">
                         <div class="form-group">
                             <label>Tên nhân viên</label>
-                            <input name="name" type="text" class="form-control" required pattern=".*\S+.*" title="This field is required" placeholder="Tên nhân viên">
+                            <input name="name" type="text" class="form-control" required pattern=".*\S+.*"
+                                   title="This field is required" placeholder="Tên nhân viên" value="<%= name %>">
                         </div>
                         <div class="form-group">
                             <label>Tên đăng nhập</label>
-                            <input name="user_id" type="text" required pattern=".*\S+.*" title="This field is required" class="form-control">
+                            <input name="user_id" type="text" required pattern=".*\S+.*"
+                                   title="This field is required" class="form-control" value="<%= user_id %>">
                         </div>
                         <div class="form-group">
                             <label>Mật khẩu</label>
-                            <input name="password" type="text" required pattern=".*\S+.*" title="This field is required" class="form-control">
+                            <input name="password" type="text" required pattern=".*\S+.*"
+                                   title="This field is required" class="form-control" value="<%= password %>">
                         </div>
                         <div class="form-group">
                             <label>Giới tính</label><br>
-                            <input type="radio" name="gender" value="Male" checked> Nam<br>
-                            <input type="radio" name="gender" value="Female"> Nữ<br>
-                            <input type="radio" name="gender" value="Other"> Khác
+                            <input type="radio" name="gender" value="Male" <%= gender == 'Male' ? 'checked' : ''%>> Nam<br>
+                            <input type="radio" name="gender" value="Female" <%= gender == 'Female' ? 'checked' : ''%>> Nữ<br>
+                            <input type="radio" name="gender" value="Other" <%= gender == 'Other' ? 'checked' : ''%>> Khác
                         </div>
                     </div>
 
@@ -64,23 +67,23 @@
                         <div class="form-group">
                             <label for="select-group">Công việc</label>
                             <select name="role" class="form-control" id="select-group">
-                                <option value="ROLE-0001">Admin</option>
-                                <option value="ROLE-0002">Quản lý</option>
-                                <option value="ROLE-0003" selected>Thu ngân</option>
+                                <option value="ROLE-0001" <%= role == 'ROLE-0001' ? 'selected' : ''%>>Admin</option>
+                                <option value="ROLE-0002" <%= role == 'ROLE-0002' ? 'selected' : ''%>>Quản lý</option>
+                                <option value="ROLE-0003" <%= role == 'ROLE-0003' ? 'selected' : ''%>>Thu ngân</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Số điện thoại</label>
-                            <input name="phone" type="number" class="form-control">
+                            <input name="phone" type="number" class="form-control" value="<%= phone %>">
                         </div>
                         <div class="form-group">
                             <label>Địa chỉ</label>
-                            <input name="address" type="text" class="form-control">
+                            <input name="address" type="text" class="form-control" value="<%= address %>">
                         </div>
                         <div class="form-group">
                             <label>Trạng thái</label><br>
-                            <input type="radio" name="status" value=1 checked> Làm việc<br>
-                            <input type="radio" name="status" value=0> Không làm việc
+                            <input type="radio" name="status" value=1 <%= status == 1 ? 'checked' : ''%>> Làm việc<br>
+                            <input type="radio" name="status" value=0 <%= status == 0 ? 'checked' : ''%>> Không làm việc
                         </div>
                     </div>
                 </div>

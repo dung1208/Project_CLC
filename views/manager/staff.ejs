@@ -46,7 +46,7 @@
                     <th class="blank-col"></th>
                     <th class="ten-dang-nhap-col">Tên đăng nhập</th>
                     <th class="staff-name-col">Tên</th>
-                    <th class="staff-email-col">Email</th>
+                    <th class="staff-email-col">Địa chỉ</th>
                     <th class="staff-phone-col">Điện thoại</th>
                     <th class="staff-role-ad-col">Quyền admin/chủ cửa hàng</th>
                     <th class="staff-active-col">Cho phép đăng nhập</th>
@@ -54,7 +54,7 @@
                 </thead>
                 <tbody>
                 <% for(var i = 0; i< data.length; i++) { %>
-                    <tr class="element-staff" data-product="<%= JSON.stringify(data[i])%>">
+                    <tr class="element-staff" data-staff="<%= JSON.stringify(data[i])%>">
                         <th scope="row"><%= (i+1) %></th>
                         <td class="ten-dang-nhap"><%= data[i].Staff_id_user%></td>
                         <td class="staff-name"><%= data[i].Staff_name%></td>

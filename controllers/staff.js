@@ -61,6 +61,74 @@ module.exports = {
                 res.redirect('/staff');
             }
         })
+    },
+
+    display_edit: function (req, res) {
+        let id = req.params.id;
+        let storeId = req.session.storeId;
+
+        StaffData.get_id(id, storeId, function (err, result) {
+            if (result.length <= 0) {
+                req.flash('error', 'Staff not found with id = ' + id)
+                res.redirect('/staff')
+            } else {
+                let name = result[0].Staff_name;
+                let user_id = result[0].Staff_id_user;
+                let password = result[0].Staff_id_password;
+                let gender = result[0].Staff_genre;
+                let phone = result[0].Staff_phone_num;
+                let role = result[0].Role_id;
+                let address = result[0].Staff_address;
+                let status = result[0].Active;
+
+                res.render('manager/editStaff', {id: id, name: name, user_id: user_id, password: password,
+                        gender: gender, phone: phone, role: role, address: address, status: status});
+                // res.json(result);
+            }
+        })
+    },
+
+    update: function (req, res) {
+        let id = req.params.id;
+        let storeId = req.session.storeId;
+
+        if (!storeId) {
+            req.flash('error', "Sửa nhân viên không thành công")
+            return res.redirect('/staff');
+        }
+
+        let name = req.body.name;
+        let user_id = req.body.user_id;
+        let password = req.body.password;
+        let gender = req.body.gender;
+        let phone = req.body.phone;
+        let role = req.body.role;
+        let address = req.body.address;
+        let status = req.body.status;
+
+        let staff_form_data = {
+            Staff_name: name,
+            Staff_id_user: user_id,
+            Staff_id_password: password,
+            Staff_genre: gender,
+            Staff_phone_num: phone,
+            Role_id: role,
+            Staff_address: address,
+            Active: status
+        };
+
+        StaffData.update(id, staff_form_data, function (err, results) {
+            if (err) {
+                req.flash('error', err);
+
+                res.render('manager/editStaff', {id: id, name: name, user_id: user_id, password: password,
+                    gender: gender, phone: phone, role: role, address: address, status: status});
+            } else {
+                req.flash('success', 'Sửa nhân viên thành công');
+
+                res.redirect('/staff');
+            }
+        })
     }
 };
 

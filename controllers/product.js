@@ -174,7 +174,7 @@ module.exports = {
         ProductData.update(id, product_form_data, function(err, result) {
             //if(err) throw err
             if (err) {
-                req.flash('error', err)
+                req.flash('error', err);
 
                 // render to add.ejs
                 res.render('product/editProduct', {id: id, name: name, price: price,
