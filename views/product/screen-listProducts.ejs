@@ -32,98 +32,81 @@
     <div class="content-page">
         <div class="filter">
             <div class="panel-filter">
-                <h2 class="panel-filter-title"><i class="fas fa-th-list"></i> TÌM KIẾM</h2>
-                <div class="panel-filter-body">
-                    <div class="form-group">
-                        <input type="text" class="input-filter form-control" placeholder="Mã, Tên">
-                    </div>
-                    <div class="form-group">
-                        <form action="#">
-                            <div class="input-group">
-                                <input type="text" placeholder="Nhà cung cấp" class="form-control input-filter">
-                                <i class="fas fa-search icon-search-ncc"></i>
-                            </div>
-                            <div class="icon-undefinded">
-                                <a href="javascript:void(0)"><i class="fas fa-times"></i><span>Không xác định</span></a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="panel-filter">
                 <h2 class="panel-filter-title"><i class="fas fa-th-list"></i> LỌC THEO NHÓM</h2>
-                <div class="btn-add-group" data-toggle="modal" data-target="#modal-add-group"><i
-                        class="fas fa-plus-circle"></i>
-                </div>
+<!--                <div class="btn-add-group" data-toggle="modal" data-target="#modal-add-group"><i-->
+<!--                        class="fas fa-plus-circle"></i>-->
+<!--                </div>-->
                 <!-- The Modal -->
-                <div class="modal fade" id="modal-add-group">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
+<!--                <div class="modal fade" id="modal-add-group">-->
+<!--                    <div class="modal-dialog">-->
+<!--                        <div class="modal-content">-->
+<!--                            -->
+<!--                            &lt;!&ndash; Modal Header &ndash;&gt;-->
+<!--                            <div class="modal-header">-->
+<!--                                <h4 class="modal-title">Thêm nhóm mới</h4>-->
+<!--                                <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+<!--                            </div>-->
 
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">Thêm nhóm mới</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
+<!--                            &lt;!&ndash; Modal body &ndash;&gt;-->
+<!--                            <div class="modal-body">-->
+<!--                                <div>-->
+<!--                                    <h5>Tên nhóm</h5>-->
+<!--                                    <input type="text" class="form-control">-->
+<!--                                </div>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label for="select-group">Nhóm cha</label>-->
+<!--                                    <select class="form-control" id="select-group">-->
+<!--                                        <option>Thuốc lá</option>-->
+<!--                                        <option>Nước ngọt</option>-->
+<!--                                        <option>Mỹ phẩm</option>-->
+<!--                                        <option>Bánh kẹo</option>-->
+<!--                                        <option>Văn phòng phẩm</option>-->
 
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <div>
-                                    <h5>Tên nhóm</h5>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="select-group">Nhóm cha</label>
-                                    <select class="form-control" id="select-group">
-                                        <option>Thuốc lá</option>
-                                        <option>Nước ngọt</option>
-                                        <option>Mỹ phẩm</option>
-                                        <option>Bánh kẹo</option>
-                                        <option>Văn phòng phẩm</option>
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                            </div>-->
 
-                                    </select>
-                                </div>
-                            </div>
+<!--                            &lt;!&ndash; Modal footer &ndash;&gt;-->
+<!--                            <div class="modal-footer">-->
+<!--                                <button type="button" class="btn btn-warning" data-dismiss="modal">Thoát</button>-->
+<!--                                <button type="button" class="btn btn-primary">Lưu</button>-->
+<!--                            </div>-->
 
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-warning" data-dismiss="modal">Thoát</button>
-                                <button type="button" class="btn btn-primary">Lưu</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <div class="panel-filter-body">
                     <ul>
-                        <li><a href="javascript:void(0)"> Tất cả</a></li>
-                        <li><a href="javascript:void(0)"> Thuốc lá</a></li>
-                        <li><a href="javascript:void(0)"> Nước ngọt</a></li>
-                        <li><a href="javascript:void(0)"> Mỹ phẩm</a></li>
-                        <li><a href="javascript:void(0)"> Kẹo bánh</a></li>
-                        <li><a href="javascript:void(0)"> Văn phòng phẩm</a></li>
+                        <li><a href="/product"> Tất cả</a></li>
+                        <li><a href="/product?product_group=Thuốc lá"> Thuốc lá</a></li>
+                        <li><a href="/product?product_group=ĐỒ TRẺ EM"> Đồ trẻ em</a></li>
+                        <li><a href="/product?product_group=Mỹ phẩm"> Mỹ phẩm</a></li>
+                        <li><a href="/product?product_group=ĐỒ SINH HOẠT CÁ NHÂN"> Đồ sinh hoạt cá nhân</a></li>
+                        <li><a href="/product?product_group=Văn phòng phẩm"> Văn phòng phẩm</a></li>
+                        <li><a href="/product?product_group=ĐỒ UỐNG SỮA"> Đồ uống sữa</a></li>
+                        <li><a href="/product?product_group=ĐỒ UỐNG NƯỚC"> Đồ uống nước</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="panel-filter">
-                <h2 class="panel-filter-title"><i class="fas fa-th-list"></i> LỌC THEO TỒN KHO</h2>
-                <div class="panel-filter-body">
-                    <div class="form-group">
-                        <div class="radio">
-                            <input type="radio" name="optionRadios" id="optionRadios0">
-                            <label for="optionRadios0">Không lọc</label>
-                        </div>
-                        <div class="radio">
-                            <input type="radio" name="optionRadios" id="optionRadios1">
-                            <label for="optionRadios1">Còn hàng</label>
-                        </div>
-                        <div class="radio">
-                            <input type="radio" name="optionRadios" id="optionRadios2">
-                            <label for="optionRadios2">Hết hàng</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--            <div class="panel-filter">-->
+<!--                <h2 class="panel-filter-title"><i class="fas fa-th-list"></i> LỌC THEO TỒN KHO</h2>-->
+<!--                <div class="panel-filter-body">-->
+<!--                    <div class="form-group">-->
+<!--                        <div class="radio">-->
+<!--                            <input type="radio" name="optionRadios" id="optionRadios0">-->
+<!--                            <label for="optionRadios0">Không lọc</label>-->
+<!--                        </div>-->
+<!--                        <div class="radio">-->
+<!--                            <input type="radio" name="optionRadios" id="optionRadios1">-->
+<!--                            <label for="optionRadios1">Còn hàng</label>-->
+<!--                        </div>-->
+<!--                        <div class="radio">-->
+<!--                            <input type="radio" name="optionRadios" id="optionRadios2">-->
+<!--                            <label for="optionRadios2">Hết hàng</label>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
         <div class="table-products">
             <div class="header-table-products">

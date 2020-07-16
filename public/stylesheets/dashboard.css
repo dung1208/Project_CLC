@@ -8067,3 +8067,8 @@ a.text-primary:hover, a.text-primary:focus {
   border-top:  3px solid #d71920;
   
 }
+/*.container-main{*/
+/*    display: flex;*/
+/*width: 100%;*/
+/*    justify-content: space-around;*/
+/*}*/

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="/images/logo.png">
+    <link rel="stylesheet" href="/stylesheets/header-manager.css">
+    <link rel="stylesheet" href="/stylesheets/staff.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <title>Danh sách hàng hóa</title>
+
+    <!-- Custom styles for this page -->
+    <link href="/stylesheets/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <% include ../layout/header-manager %>
+
+    <% if (messages.success) { %>
+        <div class="alert alert-success" role="alert"><%- messages.success %></div>
+    <% } %>
+
+    <% if (messages.error) { %>
+        <div class="alert alert-danger" role="alert"><%- messages.error %></div>
+    <% } %>
+
+    <div class="content-page">
+    <div class="table-orders">
+        <div class="header-table-orders">
+            <h1>DANH SÁCH NHÂN VIÊN</h1>
+            <div class="pull-right">
+                <button type="button" class="btn btn-primary" id="add-newStaff" ><i class="fas fa-plus-circle"></i>
+                    THÊM MỚI NHÂN VIÊN
+                </button>
+            </div>
+        </div>
+        <div class="list-staffs">
+            <table class="table table-hover" id="dataTable">
+                <thead>
+                <tr class="title-table-staffs">
+                    <th class="blank-col"></th>
+                    <th class="ten-dang-nhap-col">Tên đăng nhập</th>
+                    <th class="staff-name-col">Tên</th>
+                    <th class="staff-email-col">Email</th>
+                    <th class="staff-phone-col">Điện thoại</th>
+                    <th class="staff-role-ad-col">Quyền admin/chủ cửa hàng</th>
+                    <th class="staff-active-col">Cho phép đăng nhập</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% for(var i = 0; i< data.length; i++) { %>
+                    <tr class="element-staff" data-product="<%= JSON.stringify(data[i])%>">
+                        <th scope="row"><%= (i+1) %></th>
+                        <td class="ten-dang-nhap"><%= data[i].Staff_id_user%></td>
+                        <td class="staff-name"><%= data[i].Staff_name%></td>
+                        <td class="staff-email"><%= data[i].Staff_address%></td>
+                        <td class="staff-phone"><%= data[i].Staff_phone_num%></td>
+                        <td class="staff-role">
+                            <label>
+                                <input type="checkbox" class="checkbox" name="staff-ad" onclick="return false"
+                                        <%= data[i].Role_id != 'ROLE-0003' ? 'checked' : ''%>>
+                            </label>
+                        </td>
+                        <td class="staff-active">
+                            <label>
+                                <input type="checkbox" class="checkbox" name="staff-active" onclick="return false"
+                                        <%= data[i].Active == 1 ? 'checked' : ''%>>
+                            </label>
+                        </td>
+                    </tr>
+                <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/javascripts/header-manager.js"></script>
+<script src="/javascripts/staff.js"></script>
+
+<!-- Bootstrap core JavaScript-->
+<script src="/javascripts/jquery/jquery.min.js"></script>
+<!--<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+
+<!-- Core plugin JavaScript-->
+<script src="javascripts/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="javascripts/datatables/jquery.dataTables.min.js"></script>
+<script src="javascripts/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="javascripts/demo/datatables-demo.js"></script>
+
+</html>

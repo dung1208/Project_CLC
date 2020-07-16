@@ -201,3 +201,18 @@
 .column-center{
     text-align: center;
 }
+#autoComplete_list{
+    position: fixed !important;
+    top: 50px;
+    left: -820px !important;
+
+}
+.amount-product{
+    display: flex;
+}
+input[value="-"]{
+    width: 20px;
+}
+input[value="+"]{
+    width: 20px;
+}

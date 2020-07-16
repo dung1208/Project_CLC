@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="/images/logo.png">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/header-manager.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/screen-addProduct.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <title>Thêm nhân viên</title>
+</head>
+
+<body>
+<% include ../layout/header-manager %>
+<% if (messages.error) { %>
+    <div class="alert alert-danger" role="alert"><%- messages.error %></div>
+<% } %>
+<div class="content-page">
+    <div class="content-header">
+        <h1>THÊM MỚI NHÂN VIÊN</h1>
+    </div>
+    <div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#detail">Chi tiết</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#moreInformation">Thông tin khác</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-pane active" id="detail">
+            <form action="/staff/add" method="post">
+                <div class="content-details">
+                    <div class="content-details1">
+                        <div class="form-group">
+                            <label>Tên nhân viên</label>
+                            <input name="name" type="text" class="form-control" required pattern=".*\S+.*" title="This field is required" placeholder="Tên nhân viên">
+                        </div>
+                        <div class="form-group">
+                            <label>Tên đăng nhập</label>
+                            <input name="user_id" type="text" required pattern=".*\S+.*" title="This field is required" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Mật khẩu</label>
+                            <input name="password" type="text" required pattern=".*\S+.*" title="This field is required" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Giới tính</label><br>
+                            <input type="radio" name="gender" value="Male" checked> Nam<br>
+                            <input type="radio" name="gender" value="Female"> Nữ<br>
+                            <input type="radio" name="gender" value="Other"> Khác
+                        </div>
+                    </div>
+
+                    <div class="content-details3">
+                        <div class="form-group">
+                            <label for="select-group">Công việc</label>
+                            <select name="role" class="form-control" id="select-group">
+                                <option value="ROLE-0001">Admin</option>
+                                <option value="ROLE-0002">Quản lý</option>
+                                <option value="ROLE-0003" selected>Thu ngân</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Số điện thoại</label>
+                            <input name="phone" type="number" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Địa chỉ</label>
+                            <input name="address" type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Trạng thái</label>
+                            <input type="radio" name="status" value=1 checked> Làm việc<br>
+                            <input type="radio" name="status" value=0> Không làm việc
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-nav">
+                    <!--                        <button type="button" class="btn btn-primary"><i class="fas fa-save"></i> Lưu</button>-->
+                    <input type="submit" class="btn btn-primary" value="Lưu">
+                    <button type="button" class="btn btn-warning" id="back_product">Thoát <i class="fas fa-forward"></i></button>
+                </div>
+            </form>
+        </div>
+        <div class="tab-pane fade" id="moreInformation">
+            <div class="form-group">
+                <label>Ghi chú nhanh khi bán hàng</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+</body>
+<script src="/javascripts/header-manager.js"></script>
+<script src="/javascripts/addProduct.js"></script>
+
+</html>

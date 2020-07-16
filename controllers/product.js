@@ -4,6 +4,7 @@ module.exports = {
     list_product: function (req, res, next) {
         let user =  req.session.user;
         let storeId = req.session.storeId;
+        let product_group = req.query.product_group;
 
         if (user == null) {
             // res.send("Bạn cần đăng nhập");
@@ -28,8 +29,18 @@ module.exports = {
                 req.flash('error', err);
                 res.render("product/screen-listProducts", {data:''});
             } else {
-                res.render("product/screen-listProducts", {data:results});
-                // res.json({data:rows});
+                let list_products = [];
+                if (product_group) {
+                    results.forEach(function (product) {
+                        if (product["Product_group"] === product_group) {
+                            list_products.push(product)
+                        }
+                    })
+                } else {
+                    list_products = results;
+                }
+                res.render("product/screen-listProducts", {data:list_products});
+                // res.json({data:list_products});
             }
         })
     },
@@ -47,8 +58,8 @@ module.exports = {
 
     display_edit_product: function (req, res) {
         let id = req.params.id;
-        // let storeId = req.session.storeId;
-        var storeId="STORE-0001";
+        let storeId = req.session.storeId;
+
         ProductData.get_id_from_store(id, storeId,function (err, results) {
             // if product not found
             if (results.length <= 0) {
@@ -89,7 +100,7 @@ module.exports = {
         if (!id) {
             let now = new Date();
             id = Date2String(now);
-            console.log(id);
+            // console.log(id);
         }
 
         let product_form_data = {

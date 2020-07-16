@@ -334,7 +334,7 @@ function DayFilter(type, grid) {
   let _greaterDay = null;
   let now = new Date();
   if (type === "today") {
-    _lowerDay = new Date();
+    _lowerDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     _greaterDay = new Date();
   }
   if (type === "yesterday") {
