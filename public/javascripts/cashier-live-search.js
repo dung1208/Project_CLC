@@ -135,10 +135,10 @@ const autoCompletejs = new autoComplete({
 
 		var cell_deleteProduct = row.insertCell(6);
 		cell_deleteProduct.className = "delete-product";
-		var deleteBt = document.createElement("input");
+		var deleteBt = document.createElement("div");
 		deleteBt.className = "far fa-trash-alt";
-		deleteBt.type = "button";
-		deleteBt.value = "Del";
+		// deleteBt.type = "button";
+		// deleteBt.value = "Del";
 		cell_deleteProduct.appendChild(deleteBt);
 		
 		var cell_productUnit = row.insertCell(7);
