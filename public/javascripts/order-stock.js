@@ -42,7 +42,7 @@ const autoCompletejs = new autoComplete({
 				.querySelector("#autoComplete")
 				.setAttribute("placeholder", "Loading...");
 			// Fetch External Data Source
-			const source = await fetch("/cashier/search/" + query);
+			const source = await fetch("/orderstock/search/" + query);
 
 			const data = await source.json();
 			// Post loading placeholder text
@@ -51,7 +51,7 @@ const autoCompletejs = new autoComplete({
 				.setAttribute("placeholder", "Tìm kiếm mặt hàng");
 			return data;
 		},
-		key: ["Product_name", "Product_id", "Product_price", "Product_unit"],
+		key: ["Product_name", "Product_id", "Product_price", "Product_original", "Product_small_unit"],
 		cache: false
 	},
 
@@ -105,7 +105,12 @@ const autoCompletejs = new autoComplete({
 
 		var cell_priceProduct = row.insertCell(3);
 		cell_priceProduct.className = "price-product";
-		cell_priceProduct.innerHTML = data.Product_small_unit_price;
+		var inOriginPrice = document.createElement("input");
+		inOriginPrice.className = "form-control input-original-price-product";
+		inOriginPrice.type = "text";
+		inOriginPrice.defaultValue = data.Product_original_price;
+		cell_priceProduct.appendChild(inOriginPrice);
+
 		//AmountProduct <td>
 		var cell_amountProduct = row.insertCell(4);
 		cell_amountProduct.className = "amount-product";
@@ -131,20 +136,28 @@ const autoCompletejs = new autoComplete({
 
 		var cell_totalPrice = row.insertCell(5);
 		cell_totalPrice.className = "total-price";
-		cell_totalPrice.innerHTML = parseFloat(cell_priceProduct.innerHTML) * parseFloat(inputAmount.value);
+		cell_totalPrice.innerHTML = data.Product_original_price;
 
-		var cell_deleteProduct = row.insertCell(6);
+		var cell_sellPrice = row.insertCell(6);
+		cell_sellPrice.className = "sell-price";
+		var inSellPrice = document.createElement("input");
+		inSellPrice.className = "form-control input-sell-price-product";
+		inSellPrice.type = "text";
+		inSellPrice.defaultValue = data.Product_small_unit_price;
+		cell_sellPrice.appendChild(inSellPrice);
+
+		var cell_deleteProduct = row.insertCell(7);
 		cell_deleteProduct.className = "delete-product";
 		var deleteBt = document.createElement("input");
 		deleteBt.className = "far fa-trash-alt";
 		deleteBt.type = "button";
 		deleteBt.value = "Del";
 		cell_deleteProduct.appendChild(deleteBt);
-		
-		var cell_productUnit = row.insertCell(7);
+
+		var cell_productUnit = row.insertCell(8);
 		cell_productUnit.className = "product-unit";
 		cell_productUnit.innerHTML = data.Product_small_unit;
-
+		
 		index_table += 1;
 		index_product += 1;
 		document.getElementsByClassName("text-right")[0].firstElementChild.innerHTML = index_product;	
@@ -185,7 +198,7 @@ function updateRightTable(){
 	totalBill = 0;
     Array.from(rows).forEach((row) => {
 		index_product += parseFloat(row.children[4].children[1].value);
-		row.children[5].innerHTML = parseFloat(row.children[3].innerHTML) * parseFloat(row.children[4].children[1].value);
+		row.children[5].innerHTML = parseFloat(row.children[3].children[0].value) * parseFloat(row.children[4].children[1].value);
 		totalBill += parseFloat(row.children[5].innerHTML);
 	});
 	document.getElementsByClassName("text-right")[0].firstElementChild.innerHTML = index_product;
@@ -201,10 +214,10 @@ rootElement.addEventListener("click", function (evt) {
 					if(amount > 0){
 					document.getElementsByClassName("form-control input-info-product")[index].value = amount + 1;
 					var totalPrice = parseFloat(document.getElementsByClassName("total-price")[index + 1].innerHTML);
-					document.getElementsByClassName("total-price")[index + 1].innerHTML = totalPrice + parseFloat(document.getElementsByClassName("price-product")[index].innerHTML);
+					document.getElementsByClassName("total-price")[index + 1].innerHTML = totalPrice + parseFloat(document.getElementsByClassName("price-product")[index].children[0].value);
 					index_product += 1;
 					document.getElementsByClassName("text-right")[0].firstElementChild.innerHTML = index_product;	
-					totalBill += parseFloat(document.getElementsByClassName("price-product")[index].innerHTML);
+					totalBill += parseFloat(document.getElementsByClassName("price-product")[index].children[0].value);
 					document.getElementsByClassName("text-right")[1].firstElementChild.innerHTML = totalBill;
 					}
 				});
@@ -215,10 +228,10 @@ rootElement.addEventListener("click", function (evt) {
 					if (amount > 2){
 					document.getElementsByClassName("form-control input-info-product")[index].value = amount - 1;
 					var totalPrice = parseFloat(document.getElementsByClassName("total-price")[index + 1].innerHTML);
-					document.getElementsByClassName("total-price")[index + 1].innerHTML = totalPrice - parseFloat(document.getElementsByClassName("price-product")[index].innerHTML);
+					document.getElementsByClassName("total-price")[index + 1].innerHTML = totalPrice - parseFloat(document.getElementsByClassName("price-product")[index].children[0].value);
 					index_product-= 1;
 					document.getElementsByClassName("text-right")[0].firstElementChild.innerHTML = index_product;	
-					totalBill -= parseFloat(document.getElementsByClassName("price-product")[index].innerHTML);
+					totalBill -= parseFloat(document.getElementsByClassName("price-product")[index].children[0].value);
 					document.getElementsByClassName("text-right")[1].firstElementChild.innerHTML = totalBill;
 					}
 				});
@@ -244,7 +257,7 @@ rootElement.addEventListener("click", function (evt) {
 	},
 	true
 );
-//Input handler event
+//Input amount handler event
 rootElement.addEventListener("input", function (evt) {
     var targetElement = evt.target;
     while (targetElement != null) {
@@ -267,39 +280,58 @@ rootElement.addEventListener("input", function (evt) {
 },
 true
 );
-//Pay button
-let payBt = document.getElementsByClassName("btn-pay btn-danger")[0];
-payBt.addEventListener("click", async function(){
+//Input original price handler event
+rootElement.addEventListener("input", function (evt) {
+    var targetElement = evt.target;
+    while (targetElement != null) {
+        if (targetElement.classList.contains("input-original-price-product")) {
+            editedClassHandler("form-control input-original-price-product",targetElement,function(index){
+                var amount = parseFloat(document.getElementsByClassName("form-control input-original-price-product")[index].value);
+                if(amount > 0){
+                	updateRightTable();
+				}
+				else{
+					alert("Nhập lại");
+				}
+            });
+            break;
+        } else {
+            evt.stopPropagation();
+        }
+        targetElement = targetElement.parentElement;
+    }
+},
+true
+);
+//Submit button
+let submitBt = document.getElementsByClassName("btn-submit btn-danger")[0];
+submitBt.addEventListener("click", async function(){
 	function getProductsDetails(){
 		var date = new Date();
 		var table_body = document.getElementsByClassName('table table-striped table-listProducts')[0].tBodies[0].children;
-		var order_detail = [
-			'HD' + date.toISOString().slice(2,19).replace(/[-T:]/g, ''),
-			'STAFF-0003',
+		var OS_detail = [
+			'NH' + date.toISOString().slice(2,19).replace(/[-T:]/g, ''),
+			'STAFF-0002',
 			'STORE-0001',
-			'KH-0000',
+			'NCC-0111',
 			date.toISOString().slice(0, 19).replace('T', ' '),
-			0,
-			parseFloat(document.getElementsByClassName("text-right")[1].firstElementChild.innerHTML),
 		]
-		var order_product_details = [];
+		var OS_product_details = [];
 		for(var index = 0, len = table_body.length; index < len; index++) {
 			var order_list_product = [
-				'HD' + date.toISOString().slice(2,19).replace(/[-T:]/g, ''),
+				'NH' + date.toISOString().slice(2,19).replace(/[-T:]/g, ''),
 				document.getElementsByClassName("code-product")[index].innerHTML,
 				document.getElementsByClassName("product-unit")[index].innerHTML,
 				parseFloat(document.getElementsByClassName("form-control input-info-product")[index].value),
-				parseFloat(document.getElementsByClassName("price-product")[index].innerHTML),
-				0,
-				parseFloat(document.getElementsByClassName("total-price")[index + 1].innerHTML),
+				parseFloat(document.getElementsByClassName("total-price")[index+1].innerHTML)
 			];
-			order_product_details.push(order_list_product)
+			OS_product_details.push(order_list_product)
 		}
-		console.log(order_detail);
-		console.log(order_product_details);
+		console.log(OS_detail);
+		console.log(OS_product_details);
 		var data = {
-			data_order: order_detail,
-			datas_order_product: order_product_details,
+			data_OS: OS_detail,
+			datas_OS_product: OS_product_details,
 		}
 		return data;
 	}
@@ -314,7 +346,7 @@ payBt.addEventListener("click", async function(){
 		body: JSON.stringify(data),
 	}
 	console.log(option.body)
-	await fetch('/cashier/submit',option).then(function(response) {                      // first then()
+	await fetch('/orderstock/submit',option).then(function(response) {                      // first then()
 		if(response.ok)
 		{
 		  return response.text();         
@@ -332,6 +364,8 @@ payBt.addEventListener("click", async function(){
 	index_product = 0;
 	index_table = 0;
 	totalBill = 0;
+	document.getElementsByClassName("text-right")[0].firstElementChild.innerHTML = index_product;
+	document.getElementsByClassName("text-right")[1].firstElementChild.innerHTML = totalBill;
 	index_bill += 1;
 	rootElement.innerHTML = "";
 })
